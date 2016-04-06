@@ -9,7 +9,7 @@ export class PostService {
     private posts;
 
     constructor() {
-        this.db = new Firebase('https://blinding-torch-7293.firebaseio.com/posts');
+        this.db = new Firebase();
     }
 
     create(title: string, body: string): void {
