@@ -1,0 +1,36 @@
+{
+  "name": "angular2-site",
+  "version": "1.0.0",
+  "scripts": {
+    "postinstall": "npm run typings install",
+    "tsc": "tsc",
+    "tsc:w": "tsc -w",
+    "lite": "lite-server",
+    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "typings": "typings"
+  },
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "jspm": "^0.16.32",
+    "typings": "^0.6.8",
+    "concurrently": "^1.0.0",
+    "lite-server": "^2.0.1"
+  },
+  "jspm": {
+    "dependencies": {
+      "angular2": "npm:angular2@2.0.0-beta.6",
+      "es6-promise": "npm:es6-promise@^3.0.2",
+      "es6-shim": "npm:es6-shim@^0.33.3",
+      "lodash": "npm:lodash@^4.8.2",
+      "reflect-metadata": "npm:reflect-metadata@0.1.2",
+      "rxjs": "npm:rxjs@5.0.0-beta.0",
+      "scss": "github:mobilexag/plugin-sass@^0.4.0",
+      "systemjs": "npm:systemjs@0.19.20",
+      "zone.js": "npm:zone.js@0.5.14"
+    },
+    "devDependencies": {
+      "typescript": "npm:typescript@^1.7.5"
+    }
+  }
+}
