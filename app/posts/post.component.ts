@@ -6,7 +6,7 @@ import {PostService} from './post.service';
 @Component({
     selector: 'post',
     templateUrl: 'app/posts/post.component.html',
-    providers: [PostService],
+    providers: [],
 })
 export class PostComponent implements OnInit, OnDestroy {
     public newPost: any = {};
@@ -16,7 +16,8 @@ export class PostComponent implements OnInit, OnDestroy {
         ) { }
 
     createPost() {
-        this.postService.create(this.newPost.title, this.newPost.body);
+        let d = new Date();
+        this.postService.create(this.newPost.title, this.newPost.body, d.getTime());
         this.newPost = {};
     }
 };

@@ -3,20 +3,15 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
 
 import {PostComponent} from './posts/post.component';
 import {PostsComponent} from './posts/posts.component';
+import {AboutComponent} from './about/about.component';
+import {PostService} from './posts/post.service';
 
 @Component({
     selector: 'my-app',
-    template: `
-        <h1>{{title}}</h1>
-        <nav>
-            <a [routerLink]="['Blog']">Blog</a>
-        </nav>
-        <router-outlet></router-outlet>
-    `,
-    // styleUrls: ['app/app.component.css'],
+    templateUrl: 'app/app.component.html',
     directives: [ROUTER_DIRECTIVES],
     providers: [
-        ROUTER_PROVIDERS,
+        ROUTER_PROVIDERS
     ]
 
 })
@@ -32,6 +27,17 @@ import {PostsComponent} from './posts/posts.component';
         path: '/blog/create',
         name: 'Create a Blog Post',
         component: PostComponent
+    },
+    {
+        path: '/blog/edit',
+        name: 'Edit Blog Posts',
+        component: PostsComponent,
+        data: {enableEdit: true}
+    },
+    {
+        path: '/about',
+        name: 'About',
+        component: AboutComponent
     },
 ])
 

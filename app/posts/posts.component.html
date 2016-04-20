@@ -1,6 +1,15 @@
+<h2 class="page-title">Blog</h2>
 <ul>
-    <li *ngFor="#post of posts">
-        <h3>{{ post.title }}</h3>
-        <p>{{ post.body }}</p>
+    <li class="blog-post" *ngFor="#post of posts">
+        <div class="row">
+            <h3 class="blog-post__title col-xs-10" [innerHTML]='post.title'></h3>
+            <div *ngIf="enableEdit" class="col-xs-2">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <!-- <i class="fa fa-plus-circle" aria-hidden="true"></i> -->
+            </div>
+        </div>
+        <div class="row">
+            <p class="blog-post__body col-xs-12" [innerHTML]="post.body"></p>
+        </div>
     </li>
 </ul>

@@ -33,6 +33,7 @@ System.config({
     "rxjs": "npm:rxjs@5.0.0-beta.0",
     "scss": "github:mobilexag/plugin-sass@0.4.0",
     "systemjs": "npm:systemjs@0.19.20",
+    "tether": "npm:tether@1.2.2",
     "typescript": "npm:typescript@1.8.9",
     "zone.js": "npm:zone.js@0.5.14",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -393,6 +394,10 @@ System.config({
       "process": "github:jspm/nodelibs-process@0.1.2",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0",
       "when": "npm:when@3.7.7"
+    },
+    "npm:tether@1.2.2": {
+      "process": "github:jspm/nodelibs-process@0.1.2",
+      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
     },
     "npm:typescript@1.8.9": {
       "os": "github:jspm/nodelibs-os@0.1.0"

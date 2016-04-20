@@ -1,5 +1,6 @@
 // feed.component.ts
 import {Component, OnInit, OnDestroy} from 'angular2/core';
+import {RouteData} from 'angular2/router';
 import {Post} from './post';
 import {PostService} from './post.service';
 import {Subscription} from 'rxjs/Subscription';
@@ -12,18 +13,30 @@ import {Subscription} from 'rxjs/Subscription';
 export class PostsComponent implements OnInit, OnDestroy {
     public posts: Post[] = [];
     public subscription: Subscription<Post>;
+    public enableEdit: boolean;
 
     constructor(
-        private postService: PostService
-        ) { }
+        private postService: PostService,
+        data: RouteData) {
+            this.enableEdit = data.get('enableEdit') || false;
+        }
 
     ngOnInit() {
-        this.subscription = this.postService.getAll().subscribe(post => {
-            this.posts.push(post);
-        });
+        this.nextPage();
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+    }
+
+    nextPage() {
+        this.postService.nextPage().subscribe(posts => {
+            this.posts = posts;
+        });
+    }
+
+    previousPage() {
+        this.postService.previousPage().subscribe(posts => {
+            this.posts = posts;
+        });
     }
 };
