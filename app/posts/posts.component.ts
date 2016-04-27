@@ -3,7 +3,7 @@ import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {RouteData} from 'angular2/router';
 import {Post} from './post';
 import {PostService} from './post.service';
-import {Subscription} from 'rxjs/Subscription';
+import {AdminService} from '../admin/admin.service';
 
 @Component({
     selector: 'posts',
@@ -12,30 +12,31 @@ import {Subscription} from 'rxjs/Subscription';
 })
 export class PostsComponent implements OnInit, OnDestroy {
     public posts: Post[] = [];
-    public subscription: Subscription<Post>;
-    public enableEdit: boolean;
+    public enableEdit: boolean = false;
 
     constructor(
-        private postService: PostService,
-        data: RouteData) {
-            this.enableEdit = data.get('enableEdit') || false;
+        private _postService: PostService,
+        private _adminService: AdminService) {
         }
 
     ngOnInit() {
         this.nextPage();
+        this._adminService.getAuth().subscribe(auth => {
+            this.enableEdit = auth.isAdmin;
+        });
     }
 
     ngOnDestroy() {
     }
 
     nextPage() {
-        this.postService.nextPage().subscribe(posts => {
+        this._postService.nextPage().subscribe(posts => {
             this.posts = posts;
         });
     }
 
     previousPage() {
-        this.postService.previousPage().subscribe(posts => {
+        this._postService.previousPage().subscribe(posts => {
             this.posts = posts;
         });
     }

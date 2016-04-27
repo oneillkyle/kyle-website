@@ -4,6 +4,8 @@ import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/route
 import {PostComponent} from './posts/post.component';
 import {PostsComponent} from './posts/posts.component';
 import {AboutComponent} from './about/about.component';
+import {AdminComponent} from './admin/admin.component';
+import {AdminService} from './admin/admin.service';
 import {PostService} from './posts/post.service';
 
 @Component({
@@ -11,7 +13,8 @@ import {PostService} from './posts/post.service';
     templateUrl: 'app/app.component.html',
     directives: [ROUTER_DIRECTIVES],
     providers: [
-        ROUTER_PROVIDERS
+        ROUTER_PROVIDERS,
+        AdminService
     ]
 
 })
@@ -29,15 +32,14 @@ import {PostService} from './posts/post.service';
         component: PostComponent
     },
     {
-        path: '/blog/edit',
-        name: 'Edit Blog Posts',
-        component: PostsComponent,
-        data: {enableEdit: true}
-    },
-    {
         path: '/about',
         name: 'About',
         component: AboutComponent
+    },
+    {
+        path: '/admin',
+        name: 'Admin',
+        component: AdminComponent
     },
 ])
 

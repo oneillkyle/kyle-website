@@ -11,5 +11,8 @@
         <div class="row">
             <p class="blog-post__body col-xs-12" [innerHTML]="post.body"></p>
         </div>
+        <div class="row">
+            <div class="blog-post__date col-xs-4">{{post.date | date}}</div>
+        </div>
     </li>
 </ul>

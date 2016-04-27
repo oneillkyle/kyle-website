@@ -28,12 +28,13 @@ System.config({
     "angular2": "npm:angular2@2.0.0-beta.6",
     "es6-promise": "npm:es6-promise@3.1.2",
     "es6-shim": "npm:es6-shim@0.33.13",
+    "jquery": "npm:jquery@2.2.3",
     "lodash": "npm:lodash@4.8.2",
     "reflect-metadata": "npm:reflect-metadata@0.1.2",
     "rxjs": "npm:rxjs@5.0.0-beta.0",
     "scss": "github:mobilexag/plugin-sass@0.4.0",
     "systemjs": "npm:systemjs@0.19.20",
-    "tether": "npm:tether@1.2.2",
+    "tether": "npm:tether@1.2.4",
     "typescript": "npm:typescript@1.8.9",
     "zone.js": "npm:zone.js@0.5.14",
     "github:jspm/nodelibs-assert@0.1.0": {
@@ -395,9 +396,9 @@ System.config({
       "systemjs-json": "github:systemjs/plugin-json@0.1.0",
       "when": "npm:when@3.7.7"
     },
-    "npm:tether@1.2.2": {
+    "npm:tether@1.2.4": {
       "process": "github:jspm/nodelibs-process@0.1.2",
-      "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+      "systemjs-json": "github:systemjs/plugin-json@0.1.2"
     },
     "npm:typescript@1.8.9": {
       "os": "github:jspm/nodelibs-os@0.1.0"

@@ -4,7 +4,7 @@ import {Post} from '../posts/post';
 import {LocalSettings} from '../../local-settings';
 
 @Injectable()
-export class PostService {
+export class AboutService {
 
     private db;
     private posts;
@@ -14,28 +14,29 @@ export class PostService {
         this.db = new Firebase(this.url);
     }
 
-    create(title: string, body: string): void {
-        this.db.push({
+    set(title: string, body: string, date: number): void {
+        let ref = this.db.set({
             title,
             body,
+            date
         });
     }
 
-    getAll(): Observable<Post> {
+    get(): Observable<Post> {
         return Observable.create(observer => {
-            let listener = this.db.on('child_added', snapshot => {
-                let data = snapshot.val();
-                observer.next(new Post(
-                    snapshot.key(),
-                    data.title,
-                    data.body
-                    ));
-            }, observer.error);
+            this.db
+                .once('value', snapshot => {
+                    let data = snapshot.val();
+                    let post = new Post(
+                        snapshot.key(),
+                        data.title,
+                        data.body,
+                        data.date
+                    );
 
-            return () => {
-                this.db.off('child_added', listener);
-            };
-        });
+                    observer.next(post);
+                }, observer.error);
+            });
     }
 
 }

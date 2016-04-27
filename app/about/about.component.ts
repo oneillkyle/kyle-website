@@ -1,6 +1,6 @@
 // feed.component.ts
 import {Component, OnInit, OnDestroy} from 'angular2/core';
-import {Post} from './post';
+import {Post} from '../posts/post';
 import {AboutService} from './about.service';
 
 @Component({
@@ -9,7 +9,14 @@ import {AboutService} from './about.service';
     providers: [AboutService],
 })
 export class AboutComponent implements OnInit, OnDestroy {
+    public about: Post;
     constructor(
-        private _aboutService: aboutService
+        private _aboutService: AboutService
         ) { }
+
+    ngOnInit(){
+        this._aboutService.get().subscribe(post => {
+            this.about = post;
+        });
+    }
 };

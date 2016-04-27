@@ -22,12 +22,13 @@
       "angular2": "npm:angular2@2.0.0-beta.6",
       "es6-promise": "npm:es6-promise@^3.0.2",
       "es6-shim": "npm:es6-shim@^0.33.3",
+      "jquery": "npm:jquery@^2.2.3",
       "lodash": "npm:lodash@^4.8.2",
       "reflect-metadata": "npm:reflect-metadata@0.1.2",
       "rxjs": "npm:rxjs@5.0.0-beta.0",
       "scss": "github:mobilexag/plugin-sass@^0.4.0",
       "systemjs": "npm:systemjs@0.19.20",
-      "tether": "npm:tether@^1.2.2",
+      "tether": "npm:tether@^1.2.4",
       "zone.js": "npm:zone.js@0.5.14"
     },
     "devDependencies": {

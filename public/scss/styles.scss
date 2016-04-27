@@ -1,5 +1,7 @@
 body {
     padding: 70px 0 0 0;
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 ul {
@@ -7,14 +9,12 @@ ul {
 }
 
 h2 {
-  color: #444;
-  font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
 body {
   margin: 2em;
 }
-body, input[text], button {
+input[text], button {
   color: #888;
   font-family: Cambria, Georgia;
 }
@@ -38,4 +38,20 @@ button:disabled {
 /* everywhere else */
 * {
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.blog-post{
+    margin-top:50px;
+
+    .blog-post__body{
+        color: #888;
+    }
+    .blog-post__date{
+        color: #888;
+        font-weight: lighter;
+    }
+}
+
+.router-link-active{
+    color: #444 !important;
 }

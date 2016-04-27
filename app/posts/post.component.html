@@ -10,11 +10,14 @@
 
     <fieldset class="form-group">
         <label for="post-body">Body</label>
-        <textarea type="text" id="post-body" class="form-control" required [(ngModel)]="newPost.body" ngControl="body" #body="ngForm" rows="7"></textarea>
+        <div class="summernote"></div>
+
+        <!-- <textarea type="text" id="post-body" class="form-control" required [(ngModel)]="newPost.body" ngControl="body" #body="ngForm" rows="7"></textarea>
         <div [hidden]="body.valid || body.pristine" class="alert alert-danger">
             Body is required
-        </div>
+        </div> -->
     </fieldset>
 
+    {{newPost.body}}
     <button type="submit" class="btn btn-primary" [disabled]="!postForm.form.valid">Submit</button>
 </form>
