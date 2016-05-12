@@ -2,6 +2,7 @@
 import {Component, OnInit, OnDestroy} from 'angular2/core';
 import {Post} from '../posts/post';
 import {AboutService} from './about.service';
+import {AdminService} from '../admin/admin.service';
 
 @Component({
     selector: 'about',

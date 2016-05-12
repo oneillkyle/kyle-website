@@ -29,6 +29,7 @@ export class AboutService {
                     let data = snapshot.val();
                     let post = new Post(
                         snapshot.key(),
+                        snapshot.getPriority(),
                         data.title,
                         data.body,
                         data.date

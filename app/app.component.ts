@@ -5,18 +5,18 @@ import {PostComponent} from './posts/post.component';
 import {PostsComponent} from './posts/posts.component';
 import {AboutComponent} from './about/about.component';
 import {AdminComponent} from './admin/admin.component';
+import {SideNavComponent} from './core/side-nav.component';
 import {AdminService} from './admin/admin.service';
 import {PostService} from './posts/post.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/app.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, SideNavComponent],
     providers: [
         ROUTER_PROVIDERS,
         AdminService
     ]
-
 })
 
 @RouteConfig([

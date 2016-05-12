@@ -10,6 +10,7 @@ export class PostService {
     private posts;
     private postsPerPage: number = 5;
     private url = LocalSettings.firebase + "/posts";
+    public morePosts = true;
 
     constructor() {
         this.db = new Firebase(this.url);
@@ -31,6 +32,7 @@ export class PostService {
                 let data = snapshot.val();
                 observer.next(new Post(
                     snapshot.key(),
+                    snapshot.priority(),
                     data.title,
                     data.body,
                     data.date
@@ -43,18 +45,29 @@ export class PostService {
         });
     }
 
-    nextPage(): Observable<Post[]> {
-        let lastPost = this.posts ? this.posts[this.posts.length -1].id : undefined;
+    getCount(): Observable<number> {
         return Observable.create(observer => {
             this.db
-                .startAt(null, lastPost)
+                .once('value', snapshot => {
+                    observer.next(snapshot.numChildren());
+                }, observer.error);
+            });
+    }
+
+    nextPage(): Observable<Post[]> {
+        let lastPost = this.posts ? this.posts[this.posts.length -1].priority : undefined;
+        return Observable.create(observer => {
+            this.db
+                .orderByPriority()
+                .startAt(lastPost || null)
                 .limitToFirst(this.postsPerPage + (lastPost ? 1 : 0))
                 .once('value', snapshot => {
                     let posts = [];
                     snapshot.forEach(snap => {
                         let data = snap.val();
                         posts.push(new Post(
-                            snapshot.key(),
+                            snap.key(),
+                            snap.getPriority(),
                             data.title,
                             data.body,
                             data.date
@@ -62,8 +75,10 @@ export class PostService {
                     });
 
                     lastPost && posts.shift();
-                    if(posts.length > 0){
-                        this.posts = posts;
+                    this.posts = posts;
+
+                    if(posts.length < this.postsPerPage){
+                        this.morePosts = false;
                     }
                     observer.next(this.posts);
                 }, observer.error);
@@ -71,17 +86,19 @@ export class PostService {
     }
 
     previousPage(): Observable<Post[]> {
-        let firstPost = this.posts[0];
+        let firstPost = this.posts[0].priority;
         return Observable.create(observer => {
             this.db
-                .endAt(null, firstPost)
+                .orderByPriority()
+                .endAt(firstPost)
                 .limitToFirst(this.postsPerPage + 1)
                 .once('value', snapshot => {
                     let posts = [];
                     snapshot.forEach(snap => {
                         let data = snap.val();
                         posts.push(new Post(
-                            snapshot.key(),
+                            snap.key(),
+                            snap.getPriority(),
                             data.title,
                             data.body,
                             data.date
