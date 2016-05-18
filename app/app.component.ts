@@ -1,5 +1,5 @@
-import { Component }       from 'angular2/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { Component }       from '@angular/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
 
 import {PostComponent} from './posts/post.component';
 import {PostsComponent} from './posts/posts.component';
@@ -29,6 +29,11 @@ import {PostService} from './posts/post.service';
     {
         path: '/blog/create',
         name: 'Create a Blog Post',
+        component: PostComponent
+    },
+    {
+        path: '/blog/:id',
+        name: 'Edit a Blog Post',
         component: PostComponent
     },
     {

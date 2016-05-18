@@ -1,11 +1,11 @@
-//import deps
 import 'es6-shim';
-import 'rxjs/Rx';
-import 'tether';
 
-import {bootstrap}    from 'angular2/platform/browser';
+import 'reflect-metadata';
+import '../public/app/css/styles.css!';
+
+import {bootstrap}    from '@angular/platform-browser-dynamic';
 import {AppComponent} from './app.component';
-import {enableProdMode} from 'angular2/core';
+import {enableProdMode} from '@angular/core';
 
 enableProdMode();
 bootstrap(AppComponent);

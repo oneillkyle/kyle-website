@@ -1,7 +1,7 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Post} from './post';
-import {LocalSettings} from '../../local-settings';
+import {FirebaseCreds} from '../firebase';
 
 @Injectable()
 export class PostService {
@@ -9,21 +9,44 @@ export class PostService {
     private db;
     private posts;
     private postsPerPage: number = 5;
-    private url = LocalSettings.firebase + "/posts";
+    private url = FirebaseCreds.url + "/posts";
     public morePosts = true;
 
     constructor() {
         this.db = new Firebase(this.url);
     }
 
-    create(title: string, body: string, date: number): void {
-        let priority = 0 - date;
-        let ref = this.db.push({
-            title,
-            body,
-            date
+    create(title: string, body: string, date: number): Observable {
+        return Observable.create(observer => {
+            let priority = 0 - date;
+            let ref = this.db.push({
+                title,
+                body,
+                date
+            });
+            ref.setPriority(priority);
+            observer.next({ id: ref.key(), status: 201 });
+        }
+    }
+
+    createOrUpdate(id: any, title: string, body: string, date: number): Observable {
+        if(id){
+            return this.update(id, title, body, date);
+        } else {
+            return this.create(title, body, date);
+        }
+    }
+
+    update(id: any, title: string, body: string, date: number): Observable {
+        return Observable.create(observer => {
+            this.db.child(id).set({ title: title, body: body }, error => {
+                if (error) {
+                    observer.next({ error: error });
+                } else {
+                    observer.next({ status: 200 });
+                }
+            });
         });
-        ref.setPriority(priority);
     }
 
     getAll(): Observable<Post> {

@@ -23,10 +23,43 @@ module.exports = function(grunt) {
         },
 
         shell: {
-            jspm: {
-                command: 'jspm bundle-sfx app public/app.js'
+            prod: {
+                command: 'jspm build app public/app.js --minify'
+            },
+            deploy: {
+                command: 'firebase deploy'
+            },  
+            dev: {
+                command: "concurrent \"npm run tsc:w\" \"npm run lite\" \"jspm bundle app public/app.js -wid\""
             }
         },
+
+        sass: {
+            dist: {
+              files: [{
+                expand: true,
+                cwd: 'app/scss',
+                src: ['*.scss'],
+                dest: 'public/app/css',
+                ext: '.css'
+              }]
+            }
+        },
+
+        processhtml: {
+            options: {
+              data: {
+                message: 'Hello world!'
+              }
+            },
+            dist: {
+              files: {
+                'public/index.html': ['index.html']
+              }
+            }
+        }
+
+        
 
     });
 
@@ -34,6 +67,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-contrib-sass');
+    grunt.loadNpmTasks('grunt-processhtml');
+
     grunt.registerTask('default', ['clean', 'copy', 'shell:jspm']);
+    grunt.registerTask('prod', ['clean', 'copy', 'sass', 'processhtml', 'shell:prod']);
+    grunt.registerTask('serve', ['clean', 'copy', 'sass', 'shell:dev']);
+    grunt.registerTask('deploy', ['shell:deploy']);
 
 }

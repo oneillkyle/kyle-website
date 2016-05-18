@@ -1,5 +1,5 @@
 // feed.component.ts
-import {Component, OnInit, OnDestroy} from 'angular2/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import {AdminService} from './admin.service';
 import {Subscription} from 'rxjs/Subscription';
 

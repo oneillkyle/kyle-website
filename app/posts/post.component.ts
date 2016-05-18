@@ -1,40 +1,34 @@
 // feed.component.ts
-import {Component, OnInit, OnDestroy, ElementRef, Input} from 'angular2/core';
+import {Component, OnInit, OnDestroy, ElementRef, Input} from '@angular/core';
 import {Post} from './post';
 import {PostService} from './post.service';
-// import * as jQuery from 'jquery';
+import {CKEditor} from 'ng2-ckeditor';
 
 @Component({
     selector: 'post',
     templateUrl: 'app/posts/post.component.html',
     providers: [PostService],
+    directives: [CKEditor]
 })
 export class PostComponent implements OnInit, OnDestroy {
-    public newPost: any = {};
-    private $el: any;
-
     @Input()
     post: Post;
 
     constructor(
-        private postService: PostService,
-        private myElement: ElementRef
-        ) { }
-
-    ngOnInit() {
-        this.$el = $(this.myElement.nativeElement).find('.summernote');
-        this.$el.summernote({
-            height: 300,                 // set editor height
-            minHeight: null,             // set minimum height of editor
-            maxHeight: null,             // set maximum height of editor
-            focus: true
-        });
+        private postService: PostService) {
+        this.post = this.post || {};
     }
 
-    createPost() {
+    ngOnInit() {
+    }
+
+    createOrUpdatePost() {
         let d = new Date();
-        this.postService.create(this.newPost.title, this.$el.summernote('code'), d.getTime());
-        this.newPost = {};
-        this.$el.summernote('empty');
+        this.postService.createOrUpdate(this.post.id, this.post.title, this.post.body, d.getTime()).subscribe(response => {
+            console.log(response);
+            if( response.status === 201 ){
+                this.post.id = response.id;
+            }
+        });
     }
 };

@@ -1,11 +1,11 @@
-import {Injectable} from 'angular2/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
-import {LocalSettings} from '../../local-settings';
+import {FirebaseCreds} from '../firebase';
 
 @Injectable()
 export class AdminService {
     private db;
-    private url = LocalSettings.firebase;
+    private url = FirebaseCreds.url;
 
     constructor() {
         this.db = new Firebase(this.url);

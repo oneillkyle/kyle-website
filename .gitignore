@@ -13,3 +13,5 @@ local-settings.ts
 local-settings.js
 local-settings.js.map
 public
+.sass-cache
+firebase.json
