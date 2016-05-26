@@ -8,10 +8,8 @@ export class AboutService {
 
     private db;
     private posts;
-    private url = FirebaseCreds.url + '/about';
-
     constructor() {
-        this.db = new Firebase(this.url);
+        this.db = firebase.database().ref('/about');
     }
 
     set(title: string, body: string, date: number): void {
@@ -28,7 +26,7 @@ export class AboutService {
                 .once('value', snapshot => {
                     let data = snapshot.val();
                     let post = new Post(
-                        snapshot.key(),
+                        snapshot.key,
                         snapshot.getPriority(),
                         data.title,
                         data.body,

@@ -1,5 +1,5 @@
 import { Component }       from '@angular/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 import {PostComponent} from './posts/post.component';
 import {PostsComponent} from './posts/posts.component';

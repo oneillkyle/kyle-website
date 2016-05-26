@@ -1,13 +1,16 @@
 {
-    "firebase": "blinding-torch-7293",
+  "hosting": {
     "public": "public",
-    "ignore": [
-        "firebase.json",
-        "**/node_modules/**",
-        "**/jspm_packages/**"
-    ],
-    "rewrites": [{
+    "rewrites": [
+      {
         "source": "**",
         "destination": "/index.html"
-    }]
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/node_modules/**",
+      "**/jspm_packages/**"
+    ]
+  }
 }

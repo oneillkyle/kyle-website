@@ -24,6 +24,7 @@ export class PostsComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.nextPage();
         this._adminService.getAuth().subscribe(auth => {
+            console.log(auth);
             this.enableEdit = auth.isAdmin;
         });
         // this._postService.getCount().subscribe(total => {

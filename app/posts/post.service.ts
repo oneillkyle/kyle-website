@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Post} from './post';
-import {FirebaseCreds} from '../firebase';
 
 @Injectable()
 export class PostService {
@@ -9,11 +8,10 @@ export class PostService {
     private db;
     private posts;
     private postsPerPage: number = 5;
-    private url = FirebaseCreds.url + "/posts";
     public morePosts = true;
 
     constructor() {
-        this.db = new Firebase(this.url);
+        this.db = firebase.database().ref('/posts');
     }
 
     create(title: string, body: string, date: number): Observable {
@@ -25,7 +23,7 @@ export class PostService {
                 date
             });
             ref.setPriority(priority);
-            observer.next({ id: ref.key(), status: 201 });
+            observer.next({ id: ref.key, status: 201 });
         }
     }
 
@@ -54,7 +52,7 @@ export class PostService {
             let listener = this.db.on('child_added', snapshot => {
                 let data = snapshot.val();
                 observer.next(new Post(
-                    snapshot.key(),
+                    snapshot.key,
                     snapshot.priority(),
                     data.title,
                     data.body,
@@ -89,7 +87,7 @@ export class PostService {
                     snapshot.forEach(snap => {
                         let data = snap.val();
                         posts.push(new Post(
-                            snap.key(),
+                            snap.key,
                             snap.getPriority(),
                             data.title,
                             data.body,
@@ -120,7 +118,7 @@ export class PostService {
                     snapshot.forEach(snap => {
                         let data = snap.val();
                         posts.push(new Post(
-                            snap.key(),
+                            snap.key,
                             snap.getPriority(),
                             data.title,
                             data.body,

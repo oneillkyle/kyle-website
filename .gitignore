@@ -15,3 +15,5 @@ local-settings.js.map
 public
 .sass-cache
 firebase.json
+
+.firebaserc
