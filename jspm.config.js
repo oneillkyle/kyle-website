@@ -24,7 +24,8 @@ SystemJS.config({
     }
   },
   map: {
-    "angular2": "npm:angular2@2.0.0-beta.17"
+    "angular2": "npm:angular2@2.0.0-beta.17",
+    "@angular2-material": "npm:@angular2-material"
   }
 });
 
@@ -35,6 +36,21 @@ SystemJS.config({
     "npm:*.json"
   ],
   map: {
+    "@angular2-material/button": "npm:@angular2-material/button@2.0.0-alpha.4-3",
+    "@angular2-material/checkbox": "npm:@angular2-material/checkbox@2.0.0-alpha.4-3",
+    "@angular2-material/grid-list": "npm:@angular2-material/grid-list@2.0.0-alpha.4-3",
+    "@angular2-material/icon": "npm:@angular2-material/icon@2.0.0-alpha.4-3",
+    "@angular2-material/input": "npm:@angular2-material/input@2.0.0-alpha.4-3",
+    "@angular2-material/list": "npm:@angular2-material/list@2.0.0-alpha.4-3",
+    "@angular2-material/progress-circle": "npm:@angular2-material/progress-circle@2.0.0-alpha.4-3",
+    "@angular2-material/radio": "npm:@angular2-material/radio@2.0.0-alpha.4-3",
+    "@angular2-material/sidenav": "npm:@angular2-material/sidenav@2.0.0-alpha.4-3",
+    "@angular2-material/slide-toggle": "npm:@angular2-material/slide-toggle@2.0.0-alpha.5",
+    "@angular2-material/tabs": "npm:@angular2-material/tabs@2.0.0-alpha.5",
+    "@angular2-material/toolbar": "npm:@angular2-material/toolbar@2.0.0-alpha.4-3",
+    "@angular2-material/card": "npm:@angular2-material/card@2.0.0-alpha.5",
+    "@angular2-material/core": "npm:@angular2-material/core@2.0.0-alpha.5",
+    "@angular2-material/progress-bar": "npm:@angular2-material/progress-bar@2.0.0-alpha.5",
     "@angular/common": "npm:@angular/common@2.0.0-rc.1",
     "@angular/compiler": "npm:@angular/compiler@2.0.0-rc.1",
     "@angular/core": "npm:@angular/core@2.0.0-rc.1",
