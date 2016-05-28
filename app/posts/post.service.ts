@@ -37,7 +37,7 @@ export class PostService {
 
     update(id: any, title: string, body: string, date: number): Observable {
         return Observable.create(observer => {
-            this.db.child(id).set({ title: title, body: body }, error => {
+            this.db.child(id).update({ title: title, body: body }, error => {
                 if (error) {
                     observer.next({ error: error });
                 } else {
