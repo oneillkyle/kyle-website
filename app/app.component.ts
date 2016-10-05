@@ -1,25 +1,38 @@
-import { Component }       from 'angular2/core';
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { Component }       from '@angular/core';
+
+import {AuthService} from './admin/auth.service';
+import './styles.css';
+import '../firebase_init.js';
 
 @Component({
     selector: 'my-app',
-    template: `
-        <h1>{{title}}</h1>
-        <nav>
-        </nav>
-        <router-outlet></router-outlet>
-    `,
-    // styleUrls: ['app/app.component.css'],
-    directives: [ROUTER_DIRECTIVES],
-    providers: [
-        ROUTER_PROVIDERS,
-    ]
-
+    templateUrl: './app.component.html',
+    providers: []
 })
-
-@RouteConfig([
-])
 
 export class AppComponent {
     title = 'Kyle\'s Website';
+    user;
+    admin;
+    sub: any;
+
+    public constructor(
+        private authService: AuthService){
+    }
+
+    ngOnInit() {
+        this.sub = this.authService.authSubscribe().subscribe(user => {
+            this.user = user['user'];
+            this.admin = user['admin'];
+        });
+        this.authService.emitUser();
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    signOut(){
+        this.authService.signOut();
+    }
 }

@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "games": {
+      ".read": "true",
+      ".write": "root.child('admins/'+auth.uid).exists()",
+      ".indexOn": "time"
+    },
+    "ratings": {
+      ".read": "auth != null",
+      ".write": "false",
+      "$rating": {
+         ".write": "(data.exists() && data.child('user').val() === auth.uid) || (!data.exists() && auth != null)"
+      },
+      ".indexOn": "user"
+    },
+    "teams": {
+      ".read": "true",
+      ".write": "root.child('admins/'+auth.uid).exists()"
+    },
+    "ratingsWeight": {
+      ".read": "root.child('admins/'+auth.uid).exists()",
+      ".write": "root.child('admins/'+auth.uid).exists()"
+    },
+    ".read": "false",
+    ".write": "false"
+  }
+}

@@ -1,8 +1,7 @@
-//import deps
-import 'es6-shim';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import {enableProdMode} from '@angular/core';
+import { AppModule } from './app.module';
+const platform = platformBrowserDynamic();
 
-import '../public/scss/styles.scss!';
-import {bootstrap}    from 'angular2/platform/browser';
-import {AppComponent} from './app.component';
-
-bootstrap(AppComponent);
+enableProdMode();
+platform.bootstrapModule(AppModule);
