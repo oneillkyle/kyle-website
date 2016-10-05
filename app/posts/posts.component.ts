@@ -1,35 +1,40 @@
-// feed.component.ts
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Post} from './post';
 import {PostService} from './post.service';
-import {AdminService} from '../admin/admin.service';
+import {AuthService} from '../admin/auth.service';
 import {PagerComponent} from '../core/pager.component';
 
 @Component({
     selector: 'posts',
-    templateUrl: 'app/posts/posts.component.html',
+    templateUrl: './posts.component.html',
     providers: [PostService],
-    directives: [PagerComponent]
 })
 export class PostsComponent implements OnInit, OnDestroy {
     public posts: Post[] = [];
     public enableEdit: boolean = false;
     public morePosts: boolean = false;
 
+    user;
+    admin;
+    authSub;
+
     constructor(
         private _postService: PostService,
-        private _adminService: AdminService) {
+        private authService: AuthService) {
         }
 
     ngOnInit() {
         this.nextPage();
-        this._adminService.getAuth().subscribe(auth => {
-            console.log(auth);
-            this.enableEdit = auth.isAdmin;
+        this.getUser();
+    }
+
+    getUser() {
+        this.authSub = this.authService.authSubscribe().subscribe(user => {
+            this.user = user['user'];
+            this.admin = user['admin'];
+            this.enableEdit = this.admin;
         });
-        // this._postService.getCount().subscribe(total => {
-        //     this.totalPosts = total;
-        // });
+        this.authService.emitUser();
     }
 
     ngOnDestroy() {

@@ -1,15 +1,14 @@
-// feed.component.ts
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Post} from '../posts/post';
 import {AboutService} from './about.service';
-import {AdminService} from '../admin/admin.service';
+import {AuthService} from '../admin/auth.service';
 
 @Component({
     selector: 'about',
-    templateUrl: 'app/about/about.component.html',
+    templateUrl: './about.component.html',
     providers: [AboutService],
 })
-export class AboutComponent implements OnInit, OnDestroy {
+export class AboutComponent implements OnInit {
     public about: Post;
     constructor(
         private _aboutService: AboutService
@@ -19,5 +18,9 @@ export class AboutComponent implements OnInit, OnDestroy {
         this._aboutService.get().subscribe(post => {
             this.about = post;
         });
+    }
+
+    ngOnDestroy(){
+
     }
 };

@@ -1,14 +1,11 @@
-// feed.component.ts
 import {Component, OnInit, OnDestroy, ElementRef, Input} from '@angular/core';
 import {Post} from './post';
 import {PostService} from './post.service';
-import {CKEditor} from 'ng2-ckeditor';
 
 @Component({
     selector: 'post',
-    templateUrl: 'app/posts/post.component.html',
+    templateUrl: './post.component.html',
     providers: [PostService],
-    directives: [CKEditor]
 })
 export class PostComponent implements OnInit, OnDestroy {
     @Input()
@@ -16,7 +13,7 @@ export class PostComponent implements OnInit, OnDestroy {
 
     constructor(
         private postService: PostService) {
-        this.post = this.post || {};
+        // this.post = this.post || {};
     }
 
     ngOnInit() {
@@ -30,5 +27,9 @@ export class PostComponent implements OnInit, OnDestroy {
                 this.post.id = response.id;
             }
         });
+    }
+
+    ngOnDestroy() {
+
     }
 };

@@ -2,9 +2,10 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Post} from './post';
 
+declare var firebase: any;
+
 @Injectable()
 export class PostService {
-
     private db;
     private posts;
     private postsPerPage: number = 5;
@@ -14,7 +15,7 @@ export class PostService {
         this.db = firebase.database().ref('/posts');
     }
 
-    create(title: string, body: string, date: number): Observable {
+    create(title: string, body: string, date: number): Observable<any> {
         return Observable.create(observer => {
             let priority = 0 - date;
             let ref = this.db.push({
@@ -24,10 +25,10 @@ export class PostService {
             });
             ref.setPriority(priority);
             observer.next({ id: ref.key, status: 201 });
-        }
+        });
     }
 
-    createOrUpdate(id: any, title: string, body: string, date: number): Observable {
+    createOrUpdate(id: any, title: string, body: string, date: number): Observable<any> {
         if(id){
             return this.update(id, title, body, date);
         } else {
@@ -35,7 +36,7 @@ export class PostService {
         }
     }
 
-    update(id: any, title: string, body: string, date: number): Observable {
+    update(id: any, title: string, body: string, date: number): Observable<any> {
         return Observable.create(observer => {
             this.db.child(id).update({ title: title, body: body }, error => {
                 if (error) {

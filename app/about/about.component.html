@@ -1,4 +1,4 @@
 <div>
-    <h2 class="page-title" *ngIf="about" [innerHTML]='about.title'></h2>
-    <div *ngIf="about" [innerHTML]='about.body'></div>
+    <h2 class="page-title" *ngIf="about">{{about.title}}</h2>
+    <div *ngIf="about">{{about.body}}</div>
 </div>

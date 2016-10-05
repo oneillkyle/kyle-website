@@ -1,38 +1,49 @@
-// feed.component.ts
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {AdminService} from './admin.service';
+import {Router} from '@angular/router';
+import {AuthService} from './auth.service';
 import {Subscription} from 'rxjs/Subscription';
 
 @Component({
     selector: 'admin',
     template: `
-        <button (click)="login()">Login</button>
-        <button (click)="logout()">Logout</button>
+        <div class="row">
+            <div class="col s12">
+              <div class="card blue-grey darken-1">
+                <div class="card-content white-text">
+                  <span class="card-title">Admin Panel</span>
+                </div>
+                <div class="card-action">
+                    <a class="waves-effect waves-light btn"
+                        *ngIf="admin">Add a Team</a>
+                </div>
+              </div>
+            </div>
+        </div>
     `,
     providers: []
 })
 export class AdminComponent implements OnInit, OnDestroy {
-    public subscription: Subscription;
+    sub: any;
+    user;
+    admin;
 
-    constructor(
-        private _adminService: AdminService) {
-        }
+    public constructor(
+        private authService: AuthService,
+        private router: Router) {
+    }
 
     ngOnInit() {
-
-    }
-
-    login() {
-        this.subscription = this._adminService.login().subscribe(
-            auth => {console.log(auth)},
-            error => {console.log(error)}
-        );
-    }
-
-    logout() {
-        this._adminService.logout();
+        this.sub = this.authService.authSubscribe().subscribe(user => {
+            this.user = user['user'];
+            this.admin = user['admin'];
+            if (!this.user) {
+                this.router.navigate(['/login']);
+            }
+        });
+        this.authService.emitUser();
     }
 
     ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 };

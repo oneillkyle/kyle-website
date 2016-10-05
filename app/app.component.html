@@ -1,27 +1,30 @@
-<nav class="navbar navbar-dark bg-inverse navbar-fixed-top navbar-full">
-  <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
-    &#9776;
-  </button>
-  <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
-    <a class="navbar-brand" [routerLink]="['Blog']">Kyle O'Neill</a>
-    <ul class="nav navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['Blog']">Blog</a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" [routerLink]="['About']">About</a>
-      </li>
-    </ul>
-  </div>
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Kyle O'Neill</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li>
+            <a routerLink="/blog" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
+          </li>
+          <li>
+            <a routerLink="/about" routerLinkActive="active">About</a>
+          </li>
+          <li *ngIf="!user">
+            <a routerLink="/login" routerLinkActive="active">Login</a>
+          </li>
+          <li *ngIf="user">
+            <a routerLink="/admin" routerLinkActive="active">Admin</a>
+          </li>
+          <li *ngIf="user">
+            <a (click)="signOut()">Sign Out</a>
+          </li>
+        </ul>
+    </div>
 </nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-xs-12 col-md-8">
-            <router-outlet></router-outlet>
-        </div>
-        <div class="col-xs-12 col-md-4">
-            <side-nav></side-nav>
-        </div>
+<div class="container">
+    <div class="col s12 m8">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="col s12 m4">
+        <side-nav></side-nav>
     </div>
 </div>

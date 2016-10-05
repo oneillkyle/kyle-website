@@ -3,6 +3,8 @@ import {Observable} from 'rxjs/Observable';
 import {Post} from '../posts/post';
 import {FirebaseCreds} from '../firebase';
 
+declare var firebase: any;
+
 @Injectable()
 export class AboutService {
 
