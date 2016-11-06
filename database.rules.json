@@ -1,27 +1,18 @@
 {
   "rules": {
-    "games": {
-      ".read": "true",
-      ".write": "root.child('admins/'+auth.uid).exists()",
-      ".indexOn": "time"
+    ".read": false,
+    ".write": false,
+    "posts": {
+      ".read": true,
+      ".write": "root.child('groups/admin').hasChild(auth.uid)"
     },
-    "ratings": {
-      ".read": "auth != null",
-      ".write": "false",
-      "$rating": {
-         ".write": "(data.exists() && data.child('user').val() === auth.uid) || (!data.exists() && auth != null)"
-      },
-      ".indexOn": "user"
+    "about": {
+      ".read": true,
+      ".write": "root.child('groups/admin').hasChild(auth.uid)"
     },
-    "teams": {
-      ".read": "true",
-      ".write": "root.child('admins/'+auth.uid).exists()"
-    },
-    "ratingsWeight": {
-      ".read": "root.child('admins/'+auth.uid).exists()",
-      ".write": "root.child('admins/'+auth.uid).exists()"
-    },
-    ".read": "false",
-    ".write": "false"
+    "groups": {
+      ".read": "root.child('groups/admin').hasChild(auth.uid)",
+      ".write": false
+    }
   }
 }

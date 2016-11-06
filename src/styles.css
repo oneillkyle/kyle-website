@@ -1,0 +1,42 @@
+li > a.active {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.brand-logo {
+    margin-left: 10px;
+}
+
+.game-rating {
+    font-size: 3em;
+}
+
+
+.select-group label {
+    font-size: 2rem !important;
+}
+
+.select-group select {
+    background-color: inherit !important;
+}
+
+.select-group option {
+    color: black !important;
+    background-color: inherit !important;
+}
+
+.post-date {
+    opacity: 0.5;
+    font-size: 75%;
+}
+
+.post-body {
+  padding: 25px 15px;
+}
+
+.btn-primary {
+  background-color: #1e88e5;
+}
+
+.btn-primary:hover {
+  background-color: #2196f3;
+}

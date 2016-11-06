@@ -3,10 +3,10 @@ logs
 *.log
 npm-debug.log*
 
-app/**/*.js
-app/**/*.map
-app/app-settings.ts
-firebase_init.js
+src/app/**/*.js
+src/app/**/*.map
+src/app/app-settings.ts
+src/app/firebase-config.ts
 public/
 typings/
 credentials.json
