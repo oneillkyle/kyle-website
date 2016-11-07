@@ -14,6 +14,8 @@ export class PostComponent implements OnInit, OnDestroy {
   @Input()
   enableEdit: boolean = false;
   @Input()
+  enableDelete: boolean = false;
+  @Input()
   morePosts: boolean = false;
   @Output()
   onPostSave: EventEmitter<any> = new EventEmitter();
@@ -61,9 +63,11 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   deletePost() {
-    this.onDeletePost.emit({
-      key: _.get(this.post, '$key', null)
-    });
+    if(confirm('Are you sure you want to delete?')){
+      this.onDeletePost.emit({
+        key: _.get(this.post, '$key', null)
+      });
+    }
   }
 
   loadMorePosts() {

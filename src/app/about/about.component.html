@@ -2,6 +2,7 @@
   <div class="col s12">
     <post *ngIf="about"
       [enableEdit]="enableEdit"
+      [enableDelete]="false"
       [post]="about"
       (onPostSave)="updatePost($event)">
     </post>

@@ -10,7 +10,7 @@
     <a *ngIf="enableEdit" (click)='editPost()' class="btn btn-primary">
       Edit
     </a>
-    <a *ngIf="enableEdit" (click)='deletePost()' class="btn btn-primary">
+    <a *ngIf="enableDelete" (click)='deletePost()' class="btn btn-primary">
       Delete
     </a>
     <a *ngIf="morePosts" (click)="loadMorePosts()" class="btn btn-primary">
@@ -35,6 +35,7 @@
       <fieldset class="form-group">
         <label for="post-date">Publish Date</label>
         <datepicker-ionic
+          required
           singleSelect
           [(ngModel)]="date"
           [expanded]="true"
@@ -46,7 +47,11 @@
 
       <fieldset class="form-group">
         <label for="post-body">Body</label>
-        <ckeditor name="body" [(ngModel)]="post.body" [config]="{uiColor: '#99000'}"></ckeditor>
+        <ckeditor
+          name="body"
+          [(ngModel)]="post.body"
+          [config]="{uiColor: '#99000'}"
+          required></ckeditor>
       </fieldset>
 
       <button class="btn btn-primary"
