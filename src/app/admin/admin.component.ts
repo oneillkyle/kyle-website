@@ -36,7 +36,6 @@ export class AdminComponent implements OnInit, OnDestroy {
         this.sub = this.authService.getAuth().subscribe(user => {
             this.user = user['user'];
             this.admin = user['admin'];
-            console.log(user);
             if (!this.user) {
                 this.router.navigate(['/login']);
             }

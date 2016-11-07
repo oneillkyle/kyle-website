@@ -22,7 +22,6 @@ export class AppComponent {
         this.sub = this.authService.getAuth().subscribe(user => {
             this.user = user['user'];
             this.admin = user['admin'];
-            console.log(user);
         });
     }
 

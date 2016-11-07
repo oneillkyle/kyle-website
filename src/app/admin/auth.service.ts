@@ -17,7 +17,6 @@ export class AuthService {
 
   initFirebase() {
     this.af.auth.subscribe(auth => {
-       console.log(auth);
        this.user = auth;
        this.authSubject.next({user: auth, admin: this.isAdmin(_.get(auth, 'uid', null))});
     });
