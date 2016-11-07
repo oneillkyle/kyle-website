@@ -1,4 +1,6 @@
-<div class="card grey lighten-3" *ngIf="!editingPost">
+<div class="card grey lighten-3"
+  [ngClass]="{'unpublished': currentDate < post.date}"
+  *ngIf="!editingPost">
   <div class="card-content black-text">
     <span class="card-title">{{post.title}}</span>
     <div class="post-date">{{post.date | date}}</div>
@@ -8,13 +10,17 @@
     <a *ngIf="enableEdit" (click)='editPost()' class="btn btn-primary">
       Edit
     </a>
+    <a *ngIf="enableEdit" (click)='deletePost()' class="btn btn-primary">
+      Delete
+    </a>
     <a *ngIf="morePosts" (click)="loadMorePosts()" class="btn btn-primary">
       Load more posts
     </a>
   </div>
 </div>
 
-<div *ngIf="editingPost && enableEdit" class="card grey lighten-3">
+<div *ngIf="editingPost && enableEdit"
+  class="card grey lighten-3">
   <div class="card-content black-text">
     <form (ngSubmit)="postForm.form.valid && createOrUpdatePost()" #postForm="ngForm">
       <fieldset class="form-group">
@@ -43,7 +49,9 @@
         <ckeditor name="body" [(ngModel)]="post.body" [config]="{uiColor: '#99000'}"></ckeditor>
       </fieldset>
 
-      <button class="btn btn-primary" (click)="editingPost = false">Cancel</button>
+      <button class="btn btn-primary"
+        (click)="editingPost = false"
+        *ngIf="!newPost">Cancel</button>
       <button type="submit" class="btn btn-primary" [disabled]="!postForm.form.valid">Submit</button>
     </form>
   </div>

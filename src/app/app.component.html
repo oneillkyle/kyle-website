@@ -8,9 +8,6 @@
       <li>
         <a routerLink="/about" routerLinkActive="active">About</a>
       </li>
-      <li *ngIf="admin">
-        <a routerLink="/admin" routerLinkActive="active">Admin</a>
-      </li>
       <li *ngIf="user">
         <a (click)="signOut()">Sign Out</a>
       </li>

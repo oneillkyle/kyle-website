@@ -18,6 +18,7 @@ export class PostsComponent implements OnInit, OnDestroy {
   user;
   admin;
   authSub;
+  addingPost: boolean = false;
 
   constructor(
     private postService: PostService,
@@ -34,11 +35,16 @@ export class PostsComponent implements OnInit, OnDestroy {
       this.user = user['user'];
       this.admin = user['admin'];
       this.enableEdit = this.admin;
+      if(this.admin) this.posts = this.postService.getAllPosts();
     });
   }
 
   createOrUpdatePost({key, post}) {
     this.postService.createOrUpdate(key, post);
+  }
+
+  deletePost(post){
+    this.postService.remove(post.key);
   }
 
   ngOnDestroy() {

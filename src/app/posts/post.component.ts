@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 })
 export class PostComponent implements OnInit, OnDestroy {
   @Input()
-  post: Post;
+  post;
   @Input()
   enableEdit: boolean = false;
   @Input()
@@ -18,16 +18,26 @@ export class PostComponent implements OnInit, OnDestroy {
   @Output()
   onPostSave: EventEmitter<any> = new EventEmitter();
   @Output()
+  onDeletePost: EventEmitter<any> = new EventEmitter();
+  @Output()
   onMorePosts: EventEmitter<any> = new EventEmitter();
 
   editingPost: boolean = false;
   date;
+  newPost: boolean = false;
+  currentDate;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.date = moment(this.post.date);
+    if(!this.post) {
+      this.editingPost = true;
+      this.newPost = true;
+      this.post = {};
+    };
+    this.currentDate = new Date().getTime();
+    this.date = moment(_.get(this.post, 'date', this.currentDate));
   }
 
   ngOnDestroy() {
@@ -42,6 +52,17 @@ export class PostComponent implements OnInit, OnDestroy {
     this.onPostSave.emit({
       key: _.get(this.post, '$key', null),
       post: _.omit(this.post, '$key')
+    });
+    if(this.newPost) {
+      this.post = {};
+    } else {
+      this.editingPost = false;
+    }
+  }
+
+  deletePost() {
+    this.onDeletePost.emit({
+      key: _.get(this.post, '$key', null)
     });
   }
 
