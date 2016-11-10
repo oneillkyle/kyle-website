@@ -4,7 +4,8 @@
     ".write": false,
     "posts": {
       ".read": true,
-      ".write": "root.child('groups/admin').hasChild(auth.uid)"
+      ".write": "root.child('groups/admin').hasChild(auth.uid)",
+      ".indexOn": "inverseDate"
     },
     "about": {
       ".read": true,

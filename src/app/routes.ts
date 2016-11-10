@@ -11,23 +11,19 @@ import {AboutComponent} from './about/about.component';
 import {AdminComponent} from './admin/admin.component';
 
 const appRoutes: Routes = [
-    {
-        path: '',
-        redirectTo: 'blog',
-        pathMatch: 'full'
-    },
+    // {
+    //     path: '',
+    //     redirectTo: 'blog',
+    //     pathMatch: 'full'
+    // },
     {
         path: 'blog',
         component: PostsComponent,
     },
-    {
-        path: 'blog/create',
-        component: PostComponent
-    },
-    {
-        path: 'blog/:id',
-        component: PostComponent
-    },
+    // {
+    //     path: 'blog/:id',
+    //     component: PostComponent
+    // },
     {
         path: 'about',
         component: AboutComponent
@@ -38,6 +34,7 @@ const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     { path: "login", component: LoginComponent },
+    { path: '**', redirectTo: 'blog' }
 
 ];
 
