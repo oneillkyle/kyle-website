@@ -50,7 +50,7 @@
         <ckeditor
           name="body"
           [(ngModel)]="post.body"
-          [config]="{uiColor: '#99000'}"
+          [config]="{uiColor: '#99000', extraPlugins: 'divarea'}"
           required></ckeditor>
       </fieldset>
 
