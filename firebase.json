@@ -1,16 +1,16 @@
 {
+  "database": {
+    "rules": "database.rules.json"
+  },
   "hosting": {
     "public": "dist",
-    "rewrites": [
-      {
-        "source": "/robots.txt",
-        "destination": "/robots.txt"
-      },
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ],
+    "rewrites": [{
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    }, {
+      "source": "**",
+      "destination": "/index.html"
+    }],
     "ignore": [
       "firebase.json",
       "**/node_modules/**",
