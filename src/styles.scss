@@ -1,0 +1,125 @@
+@import '~@angular/material/core/theming/all-theme';
+@include mat-core();
+$primary: mat-palette($mat-blue, 500);
+$accent:  mat-palette($mat-amber, 300);
+$warn:    mat-palette($mat-red, 500);
+$theme: mat-light-theme($primary, $accent, $warn);
+@include angular-material-theme($theme);
+
+// Dark blue: #263650
+// Red: #e74e4e
+// White: #f7fbfc
+// Light blue: #57cbff
+// Medium blue: #2273aa
+// #4D8EC9
+body {
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+  // Helps fonts on OSX looks more consistent with other systems
+  // Isn't currently in button styles due to performance concerns
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.flex-row {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+}
+
+.flex-row-start {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.flex-column {
+  // padding: 0;
+  // margin: 0;
+  // list-style: none;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+
+  -webkit-flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.vertical-divider {
+  border-top-width: 0;
+  border-right-width: 1px;
+  border-right-style: solid;
+  height: 100%;
+  color: lightgrey;
+}
+
+// li > a.active {
+//     background-color: rgba(0,0,0,0.1);
+// }
+//
+// .brand-logo {
+//     margin-left: 10px;
+// }
+//
+// .game-rating {
+//     font-size: 3em;
+// }
+//
+//
+// .select-group label {
+//     font-size: 2rem !important;
+// }
+//
+// .select-group select {
+//     background-color: inherit !important;
+// }
+//
+// .select-group option {
+//     color: black !important;
+//     background-color: inherit !important;
+// }
+//
+// .post-date {
+//     opacity: 0.5;
+//     font-size: 75%;
+// }
+//
+// .post-body {
+//   padding: 25px 15px;
+// }
+//
+// .btn-primary {
+//   background-color: #1e88e5;
+// }
+//
+// .btn-primary:hover {
+//   background-color: #2196f3;
+// }
+
+.unpublished {
+  opacity: .5;
+}
