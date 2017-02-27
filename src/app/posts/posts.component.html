@@ -1,17 +1,7 @@
-<post *ngIf="enableEdit"
-  [enableEdit]="enableEdit"
-  (onPostSave)="createOrUpdatePost($event)">
+<post *ngIf="enableEdit" [enableEdit]="enableEdit" (onPostSave)="createOrUpdatePost($event)">
 </post>
-<div class="row" *ngFor="let post of posts | async; let last = last">
-  <div class="col s12">
-    <post
-      [enableEdit]="enableEdit"
-      [enableDelete]="enableEdit"
-      [post]="post"
-      [morePosts]="morePosts && last"
-      (onPostSave)="createOrUpdatePost($event)"
-      (onMorePosts)="nextPage($event)"
-      (onDeletePost)="deletePost($event)">
+<div style="margin-bottom: 25px;" *ngFor="let post of posts | async; let last = last">
+  <post [enableEdit]="enableEdit" [enableDelete]="enableEdit" [post]="post" [morePosts]="morePosts && last"
+    (onPostSave)="createOrUpdatePost($event)" (onMorePosts)="nextPage($event)" (onDeletePost)="deletePost($event)">
     </post>
-  </div>
 </div>

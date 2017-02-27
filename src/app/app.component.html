@@ -1,24 +1,16 @@
-<nav class="light-blue darken-2">
-  <div class="nav-wrapper">
-    <a routerLink="/blog" class="brand-logo">Kyle O'Neill</a>
-    <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li>
-        <a routerLink="/blog" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
-      </li>
-      <li>
-        <a routerLink="/about" routerLinkActive="active">About</a>
-      </li>
-      <li *ngIf="user">
-        <a (click)="signOut()">Sign Out</a>
-      </li>
-    </ul>
+<md-sidenav-container fullscreen>
+  <div>
+    <md-toolbar color="primary">
+      <h2>Kyle O'Neill</h2>
+      <div class="sc-toolbar">
+        <a md-button routerLink="/blog" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
+        <a md-button routerLink="/about" routerLinkActive="active">About</a>
+        <a *ngIf="user" md-button (click)="signOut()">Sign Out</a>
+      </div>
+    </md-toolbar>
+
+    <div #root="$implicit" dir="ltr" class="sc-content">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-</nav>
-<div class="container">
-  <div class="col s12 m8">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="col s12 m4">
-    <side-nav></side-nav>
-  </div>
-</div>
+</md-sidenav-container>

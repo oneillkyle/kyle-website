@@ -1,50 +1,22 @@
-<div class="card grey lighten-3"
-  [ngClass]="{'unpublished': currentDate < post.date}"
-  *ngIf="!editingPost">
-  <div class="card-content black-text">
-    <span class="card-title">{{post.title}}</span>
-    <div class="post-date">{{post.date | date}}</div>
-    <p class="post-body" [innerHTML]="post.body"></p>
-  </div>
-  <div class="card-action" *ngIf="enableEdit || morePosts">
-    <a *ngIf="enableEdit" (click)='editPost()' class="btn btn-primary">
-      Edit
-    </a>
-    <a *ngIf="enableDelete" (click)='deletePost()' class="btn btn-primary">
-      Delete
-    </a>
-    <a *ngIf="morePosts" (click)="loadMorePosts()" class="btn btn-primary">
-      Load more posts
-    </a>
-  </div>
-</div>
+<md-card [ngClass]="{'unpublished': currentDate < post.date}">
+  <md-card-title>{{post?.title}}</md-card-title>
 
-<div *ngIf="editingPost && enableEdit"
-  class="card grey lighten-3">
-  <div class="card-content black-text">
-    <form (ngSubmit)="postForm.form.valid && createOrUpdatePost()" #postForm="ngForm">
-      <fieldset class="form-group">
-        <label for="post-title">Title</label>
-        <input type="text" name="title" id="post-title" class="form-control" required [(ngModel)]="post.title"
-          ngControl="title" #name="ngModel">
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-          Name is required
-        </div>
-      </fieldset>
+  <md-card-subtitle>{{post?.date | date}}</md-card-subtitle>
 
-      <fieldset class="form-group">
-        <label for="post-date">Publish Date</label>
-        <datepicker-ionic
-          required
-          singleSelect
-          [(ngModel)]="date"
-          [expanded]="true"
-          name="date">
-        </datepicker-ionic>
+  <md-card-content>
+    <p *ngIf="!editingPost" class="post-body" [innerHTML]="post.body" style="padding: 25px;"></p>
 
-        Selected date is: {{ date }}
-      </fieldset>
+    <form *ngIf="editingPost"
+      (ngSubmit)="postForm.form.valid && createOrUpdatePost()"
+      #postForm="ngForm">
 
+      <md-input-container>
+        <input mdInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title">
+      </md-input-container>
+
+      <md-input-container>
+        <input mdInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
+      </md-input-container>
       <fieldset class="form-group">
         <label for="post-body">Body</label>
         <ckeditor
@@ -54,10 +26,25 @@
           required></ckeditor>
       </fieldset>
 
-      <button class="btn btn-primary"
+      <button md-raised-button color="warn"
         (click)="editingPost = false"
         *ngIf="!newPost">Cancel</button>
-      <button type="submit" class="btn btn-primary" [disabled]="!postForm.form.valid">Submit</button>
+      <button type="submit" md-raised-button color="primary" [disabled]="!postForm.form.valid">Submit</button>
     </form>
-  </div>
-</div>
+  </md-card-content>
+
+  <md-card-actions *ngIf="enableEdit || morePosts">
+    <button *ngIf="enableEdit" (click)='editPost()' md-raised-button color="primary">
+      Edit
+    </button>
+    <button *ngIf="enableDelete" (click)='deletePost()' md-raised-button color="warn">
+      Delete
+    </button>
+    <button *ngIf="morePosts" (click)="loadMorePosts()" md-raised-button color="primary">
+      Load more posts
+    </button>
+  </md-card-actions>
+
+  <md-card-footer></md-card-footer>
+
+</md-card>

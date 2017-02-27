@@ -1,6 +1,5 @@
 import {Component, OnInit, OnDestroy, EventEmitter, Input, Output} from '@angular/core';
 import {Post} from './post';
-import * as moment from 'moment';
 import * as _ from 'lodash';
 
 @Component({
@@ -24,8 +23,10 @@ export class PostComponent implements OnInit, OnDestroy {
   @Output()
   onMorePosts: EventEmitter<any> = new EventEmitter();
 
+  dateOptions = {};
   editingPost: boolean = false;
   date;
+  formattedDate;
   newPost: boolean = false;
   currentDate;
 
@@ -39,7 +40,8 @@ export class PostComponent implements OnInit, OnDestroy {
       this.post = {};
     };
     this.currentDate = new Date().getTime();
-    this.date = moment(_.get(this.post, 'date', this.currentDate));
+    this.date = _.get(this.post, 'date', this.currentDate);
+    this.formattedDate = this.transformTime(this.date);
   }
 
   ngOnDestroy() {
@@ -50,7 +52,7 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   createOrUpdatePost() {
-    this.post.date = this.date.valueOf();
+    this.post.date = new Date(this.formattedDate).getTime()
     this.onPostSave.emit({
       key: _.get(this.post, '$key', null),
       post: _.omit(this.post, '$key')
@@ -72,5 +74,10 @@ export class PostComponent implements OnInit, OnDestroy {
 
   loadMorePosts() {
     this.onMorePosts.emit();
+  }
+
+  transformTime(time) {
+    let timeStamp = new Date(time);
+    return timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString();
   }
 };

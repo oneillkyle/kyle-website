@@ -5,7 +5,7 @@ import {AuthService} from './admin/auth.service';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    providers: []
+    styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent {
