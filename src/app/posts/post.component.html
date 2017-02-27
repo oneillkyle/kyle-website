@@ -4,35 +4,19 @@
   <md-card-subtitle>{{post?.date | date}}</md-card-subtitle>
 
   <md-card-content>
-    <div *ngIf="!editingPost">
-      <p class="post-body" [innerHTML]="post.body"></p>
-    </div>
+    <p *ngIf="!editingPost" class="post-body" [innerHTML]="post.body" style="padding: 25px;"></p>
 
     <form *ngIf="editingPost"
       (ngSubmit)="postForm.form.valid && createOrUpdatePost()"
       #postForm="ngForm">
-      <fieldset class="form-group">
-        <label for="post-title">Title</label>
-        <input type="text" name="title" id="post-title" class="form-control" required [(ngModel)]="post.title"
-          ngControl="title" #name="ngModel">
-        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
-          Name is required
-        </div>
-      </fieldset>
 
-      <fieldset class="form-group">
-        <label for="post-date">Publish Date</label>
-        <datepicker-ionic
-          required
-          singleSelect
-          [(ngModel)]="date"
-          [expanded]="true"
-          name="date">
-        </datepicker-ionic>
+      <md-input-container>
+        <input mdInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title">
+      </md-input-container>
 
-        Selected date is: {{ date }}
-      </fieldset>
-
+      <md-input-container>
+        <input mdInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
+      </md-input-container>
       <fieldset class="form-group">
         <label for="post-body">Body</label>
         <ckeditor
@@ -42,10 +26,10 @@
           required></ckeditor>
       </fieldset>
 
-      <button class="btn btn-primary"
+      <button md-raised-button color="warn"
         (click)="editingPost = false"
         *ngIf="!newPost">Cancel</button>
-      <button type="submit" class="btn btn-primary" [disabled]="!postForm.form.valid">Submit</button>
+      <button type="submit" md-raised-button color="primary" [disabled]="!postForm.form.valid">Submit</button>
     </form>
   </md-card-content>
 
@@ -53,7 +37,7 @@
     <button *ngIf="enableEdit" (click)='editPost()' md-raised-button color="primary">
       Edit
     </button>
-    <button *ngIf="enableDelete" (click)='deletePost()' md-raised-button color="primary">
+    <button *ngIf="enableDelete" (click)='deletePost()' md-raised-button color="warn">
       Delete
     </button>
     <button *ngIf="morePosts" (click)="loadMorePosts()" md-raised-button color="primary">

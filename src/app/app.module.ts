@@ -10,7 +10,6 @@ import { routing }       from './routes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { AngularFireModule } from 'angularfire2';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
-import { DatePickerModule } from 'ng2-datepicker';
 
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard }    from './admin/auth-guard.service';
@@ -32,8 +31,7 @@ import {PostService} from './posts/post.service';
         ReactiveFormsModule,
         MaterialModule,
         AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-        CKEditorModule,
-        DatePickerModule
+        CKEditorModule
     ],
     declarations: [
         AppComponent,
