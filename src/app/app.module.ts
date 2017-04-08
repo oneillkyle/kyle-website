@@ -2,6 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { MaterialModule } from '@angular/material';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HttpModule }    from '@angular/http';
 // Imports for loading & configuring the in-memory web api
 import { AppComponent }  from './app.component';
@@ -30,6 +31,7 @@ import {PostService} from './posts/post.service';
         routing,
         ReactiveFormsModule,
         MaterialModule,
+        BrowserAnimationsModule,
         AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
         CKEditorModule
     ],

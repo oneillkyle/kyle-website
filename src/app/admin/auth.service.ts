@@ -1,15 +1,14 @@
-import {Injectable, NgZone} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import { ReplaySubject }  from 'rxjs';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AngularFire } from 'angularfire2';
 
-import { AppSettings } from '../app-settings';
+import { User } from '../datatypes';
 import * as _ from 'lodash';
 
 @Injectable()
 export class AuthService {
-  private user;
-  authSubject = new ReplaySubject<Object>();
+  private user: User;
+  authSubject = new BehaviorSubject({});
 
   constructor(private af: AngularFire) {
     this.initFirebase();
@@ -17,8 +16,16 @@ export class AuthService {
 
   initFirebase() {
     this.af.auth.subscribe(auth => {
-       this.user = auth;
-       this.authSubject.next({user: auth, admin: this.isAdmin(_.get(auth, 'uid', null))});
+      if (auth) {
+        this.af.database.object('/users/' + auth.uid).subscribe(response => {
+          this.user = new User(response);
+          this.user.uid = auth.uid;
+          this.authSubject.next(this.user);
+        });
+      } else {
+        this.user = undefined;
+        this.authSubject.next(this.user);
+      }
     });
   }
 
@@ -31,13 +38,7 @@ export class AuthService {
   }
 
   isUserAdmin() {
-    return this.isAdmin(_.get(this.user, 'uid', null));
-  }
-
-  private isAdmin(uid) {
-    return uid ?
-      _.indexOf(AppSettings.ADMINS, uid) !== -1 :
-      false;
+    return _.get(this.user, 'admin', false);
   }
 
   login() {
