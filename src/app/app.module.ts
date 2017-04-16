@@ -1,27 +1,27 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { HttpModule }    from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpModule } from '@angular/http';
 // Imports for loading & configuring the in-memory web api
-import { AppComponent }  from './app.component';
-import { routing }       from './routes';
+import { AppComponent } from './app.component';
+import { routing } from './routes';
 
-import { CKEditorModule } from 'ng2-ckeditor';
 import { AngularFireModule } from 'angularfire2';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
 
 import { AdminComponent } from './admin/admin.component';
-import { AuthGuard }    from './admin/auth-guard.service';
-import { AuthService }    from './admin/auth.service';
+import { AuthGuard } from './admin/auth-guard.service';
+import { AuthService } from './admin/auth.service';
 import { LoginComponent } from './admin/login.component';
 
-import {PostComponent} from './posts/post.component';
-import {PostsComponent} from './posts/posts.component';
-import {AboutComponent} from './about/about.component';
-import {SideNavComponent} from './core/side-nav.component';
-import {PostService} from './posts/post.service';
+import { PostComponent } from './posts/post.component';
+import { PostsComponent } from './posts/posts.component';
+import { AboutComponent } from './about/about.component';
+import { SideNavComponent } from './core/side-nav.component';
+import { PostService } from './posts/post.service';
+import { EditorComponent } from './posts/editor.component';
 
 @NgModule({
     imports: [
@@ -32,8 +32,7 @@ import {PostService} from './posts/post.service';
         ReactiveFormsModule,
         MaterialModule,
         BrowserAnimationsModule,
-        AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
-        CKEditorModule
+        AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
     ],
     declarations: [
         AppComponent,
@@ -42,7 +41,8 @@ import {PostService} from './posts/post.service';
         PostComponent,
         PostsComponent,
         AboutComponent,
-        SideNavComponent
+        SideNavComponent,
+        EditorComponent
     ],
     providers: [
         AuthGuard,

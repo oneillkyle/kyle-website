@@ -1,21 +1,36 @@
-import {Component, OnInit, OnDestroy, EventEmitter, Input, Output} from '@angular/core';
-import {Post} from './post';
+import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
+import { Post } from '../datatypes';
 import * as _ from 'lodash';
+declare var tinymce: any;
 
 @Component({
   selector: 'post',
   templateUrl: './post.component.html',
+  styles: [
+    `.mat-card-subtitle {
+      padding-left: 2px;
+    }
+    
+    .post-submits {
+      margin-top: 15px;
+      margin-left: 5px;
+    }
+    
+    .post-actions {
+      margin-left: 10px;
+    }`
+  ],
   providers: [],
 })
-export class PostComponent implements OnInit, OnDestroy {
+export class PostComponent implements OnInit {
   @Input()
-  post;
+  post: Post;
   @Input()
-  enableEdit: boolean = false;
+  enableEdit = false;
   @Input()
-  enableDelete: boolean = false;
+  enableDelete = false;
   @Input()
-  morePosts: boolean = false;
+  morePosts = false;
   @Output()
   onPostSave: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -24,27 +39,24 @@ export class PostComponent implements OnInit, OnDestroy {
   onMorePosts: EventEmitter<any> = new EventEmitter();
 
   dateOptions = {};
-  editingPost: boolean = false;
+  editingPost = false;
   date;
   formattedDate;
-  newPost: boolean = false;
+  newPost = false;
   currentDate;
 
   constructor() {
   }
 
   ngOnInit() {
-    if(!this.post) {
+    if (!this.post) {
       this.editingPost = true;
       this.newPost = true;
-      this.post = {};
+      this.post = new Post();
     };
     this.currentDate = new Date().getTime();
     this.date = _.get(this.post, 'date', this.currentDate);
     this.formattedDate = this.transformTime(this.date);
-  }
-
-  ngOnDestroy() {
   }
 
   editPost() {
@@ -57,7 +69,7 @@ export class PostComponent implements OnInit, OnDestroy {
       key: _.get(this.post, '$key', null),
       post: _.omit(this.post, '$key')
     });
-    if(this.newPost) {
+    if (this.newPost) {
       this.post = {};
     } else {
       this.editingPost = false;
@@ -65,11 +77,15 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   deletePost() {
-    if(confirm('Are you sure you want to delete?')){
+    if (confirm('Are you sure you want to delete?')) {
       this.onDeletePost.emit({
         key: _.get(this.post, '$key', null)
       });
     }
+  }
+
+  onTextContentChange(text) {
+    console.log(text);
   }
 
   loadMorePosts() {
@@ -77,7 +93,7 @@ export class PostComponent implements OnInit, OnDestroy {
   }
 
   transformTime(time) {
-    let timeStamp = new Date(time);
+    const timeStamp = new Date(time);
     return timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString();
   }
 };

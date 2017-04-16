@@ -6,3 +6,12 @@ export class User {
     this.uid = options.uid;
   }
 }
+
+export class Post {
+  constructor(
+    public body?: string,
+    public date?: number,
+    public title?: string,
+    public $key?: string | number
+  ) {}
+}

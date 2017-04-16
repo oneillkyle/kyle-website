@@ -1,43 +1,38 @@
 <md-card [ngClass]="{'unpublished': currentDate < post.date}">
-  <md-card-title>{{post?.title}}</md-card-title>
+  <md-card-title *ngIf="!editingPost">{{post?.title}}</md-card-title>
 
-  <md-card-subtitle>{{post?.date | date}}</md-card-subtitle>
+  <md-card-subtitle *ngIf="!editingPost">{{post?.date | date}}</md-card-subtitle>
 
   <md-card-content>
     <p *ngIf="!editingPost" class="post-body" [innerHTML]="post.body" style="padding: 25px;"></p>
 
-    <form *ngIf="editingPost"
-      (ngSubmit)="postForm.form.valid && createOrUpdatePost()"
-      #postForm="ngForm">
+    <form *ngIf="editingPost" (ngSubmit)="postForm.form.valid && createOrUpdatePost()" #postForm="ngForm">
 
-      <md-input-container>
-        <input mdInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title">
-      </md-input-container>
+      <div>
+        <md-input-container style="width: 500px">
+          <input mdInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title" width="">
+        </md-input-container>
+      </div>
+      <div>
+        <md-input-container style="width: 500px">
+          <input mdInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
+        </md-input-container>
+      </div>
+      <editor [elementId]="post?.$key || 'new-post'" [(content)]="post.body" (onEditorKeyup)="onTextContentChange($event)">
+      </editor>
 
-      <md-input-container>
-        <input mdInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
-      </md-input-container>
-      <fieldset class="form-group">
-        <label for="post-body">Body</label>
-        <ckeditor
-          name="body"
-          [(ngModel)]="post.body"
-          [config]="{uiColor: '#99000', extraPlugins: 'divarea'}"
-          required></ckeditor>
-      </fieldset>
-
-      <button md-raised-button color="warn"
-        (click)="editingPost = false"
-        *ngIf="!newPost">Cancel</button>
-      <button type="submit" md-raised-button color="primary" [disabled]="!postForm.form.valid">Submit</button>
+      <div class="post-submits">
+        <button md-raised-button color="warn" (click)="editingPost = false" *ngIf="!newPost">Cancel</button>
+        <button type="submit" md-raised-button color="primary" [disabled]="!postForm.form.valid">Submit</button>
+      </div>
     </form>
   </md-card-content>
 
-  <md-card-actions *ngIf="enableEdit || morePosts">
-    <button *ngIf="enableEdit" (click)='editPost()' md-raised-button color="primary">
+  <md-card-actions *ngIf="enableEdit || morePosts" class="post-actions">
+    <button *ngIf="enableEdit && !newPost &&! editingPost" (click)='editPost()' md-raised-button color="primary">
       Edit
     </button>
-    <button *ngIf="enableDelete" (click)='deletePost()' md-raised-button color="warn">
+    <button *ngIf="enableDelete &&! editingPost" (click)='deletePost()' md-raised-button color="warn">
       Delete
     </button>
     <button *ngIf="morePosts" (click)="loadMorePosts()" md-raised-button color="primary">

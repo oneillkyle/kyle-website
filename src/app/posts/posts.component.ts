@@ -1,9 +1,10 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Post} from './post';
-import {PostService} from './post.service';
-import {AuthService} from '../admin/auth.service';
-import {PagerComponent} from '../core/pager.component';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Post } from '../datatypes';
+import { PostService } from './post.service';
+import { AuthService } from '../admin/auth.service';
+import { PagerComponent } from '../core/pager.component';
 import { FirebaseListObservable } from 'angularfire2';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'posts',
@@ -12,13 +13,13 @@ import { FirebaseListObservable } from 'angularfire2';
 })
 export class PostsComponent implements OnInit, OnDestroy {
   public posts: FirebaseListObservable<any>;
-  public enableEdit: boolean = false;
-  public morePosts: boolean = false;
+  public enableEdit = false;
+  public morePosts = false;
 
   user;
   admin;
   authSub;
-  addingPost: boolean = false;
+  addingPost = false;
 
   constructor(
     private postService: PostService,
@@ -32,18 +33,16 @@ export class PostsComponent implements OnInit, OnDestroy {
 
   getUser() {
     this.authSub = this.authService.getAuth().subscribe(user => {
-      this.user = user['user'];
-      this.admin = user['admin'];
-      this.enableEdit = this.admin;
-      if(this.admin) this.posts = this.postService.getAllPosts();
+      this.user = user;
+      if (_.get(this.user, 'admin')) this.posts = this.postService.getAllPosts();
     });
   }
 
-  createOrUpdatePost({key, post}) {
+  createOrUpdatePost({ key, post }) {
     this.postService.createOrUpdate(key, post);
   }
 
-  deletePost(post){
+  deletePost(post) {
     this.postService.remove(post.key);
   }
 

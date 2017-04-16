@@ -1,7 +1,7 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Post} from '../posts/post';
-import {AboutService} from './about.service';
-import {AuthService} from '../admin/auth.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { AboutService } from './about.service';
+import { AuthService } from '../admin/auth.service';
+import { User, Post } from '../datatypes';
 
 @Component({
   selector: 'about',
@@ -9,12 +9,8 @@ import {AuthService} from '../admin/auth.service';
   providers: [AboutService],
 })
 export class AboutComponent implements OnInit {
-  public about;
-  public enableEdit: boolean = false;
-
-  user;
-  admin;
-  authSub;
+  public about: Post;
+  public user: User;
 
   constructor(
     private aboutService: AboutService,
@@ -23,24 +19,18 @@ export class AboutComponent implements OnInit {
 
   ngOnInit() {
     this.getUser();
-    this.aboutService.get().subscribe(post => {
+    this.aboutService.get().subscribe((post: Post) => {
       this.about = post;
     });
   }
 
   getUser() {
-    this.authSub = this.authService.getAuth().subscribe(user => {
-      this.user = user['user'];
-      this.admin = user['admin'];
-      this.enableEdit = this.admin;
+    this.authService.getAuth().subscribe((user: User) => {
+      this.user = user;
     });
   }
 
-  updatePost({key, post}) {
+  updatePost({ key, post }) {
     this.aboutService.set(post);
-  }
-
-  ngOnDestroy() {
-
   }
 };

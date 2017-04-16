@@ -14,6 +14,17 @@
     "groups": {
       ".read": "root.child('groups/admin').hasChild(auth.uid)",
       ".write": false
+    },
+    "users": {
+      "$uid": {
+        "teams": {
+          ".write": "$uid === auth.uid"
+        },
+        "admin": {
+          ".write": "false"
+        },
+        ".read": "$uid === auth.uid"
+      }
     }
   }
 }
