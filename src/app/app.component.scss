@@ -1,7 +1,5 @@
-
 .mat-sidenav {
   min-width: 15%;
-
   .mat-button {
     width: 100%;
     position: relative;
@@ -10,8 +8,19 @@
   }
 }
 
+@media (min-width: 680px) {
+  .sc-content {
+    padding: 32px 60px;
+  }
+}
+
+@media (max-width: 679px) {
+  .sc-content {
+    padding: 32px 0;
+  }
+}
+
 .sc-content {
-  padding: 32px;
   box-sizing: border-box;
 }
 
@@ -19,7 +28,6 @@
   .mat-icon {
     cursor: pointer;
   }
-
   .sc-toolbar {
     display: flex;
     justify-content: flex-end;
@@ -31,7 +39,6 @@
 // h1 {
 //   font-size: 20px;
 // }
-
 // stretch to screen size in fullscreen mode
 .sc-content {
   width: 100%;

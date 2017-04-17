@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Post } from '../datatypes';
 import * as _ from 'lodash';
 declare var tinymce: any;
@@ -31,6 +32,8 @@ export class PostComponent implements OnInit {
   enableDelete = false;
   @Input()
   morePosts = false;
+  @Input()
+  noHeader = false;
   @Output()
   onPostSave: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -44,8 +47,11 @@ export class PostComponent implements OnInit {
   formattedDate;
   newPost = false;
   currentDate;
+  get displayPostBody() {
+    return  this.sanitizer.bypassSecurityTrustHtml(this.post.body as string);
+  }
 
-  constructor() {
+  constructor(private sanitizer: DomSanitizer) {
   }
 
   ngOnInit() {
@@ -53,7 +59,7 @@ export class PostComponent implements OnInit {
       this.editingPost = true;
       this.newPost = true;
       this.post = new Post();
-    };
+    }
     this.currentDate = new Date().getTime();
     this.date = _.get(this.post, 'date', this.currentDate);
     this.formattedDate = this.transformTime(this.date);
@@ -64,7 +70,7 @@ export class PostComponent implements OnInit {
   }
 
   createOrUpdatePost() {
-    this.post.date = new Date(this.formattedDate).getTime()
+    this.post.date = new Date(this.formattedDate).getTime();
     this.onPostSave.emit({
       key: _.get(this.post, '$key', null),
       post: _.omit(this.post, '$key')
@@ -82,10 +88,6 @@ export class PostComponent implements OnInit {
         key: _.get(this.post, '$key', null)
       });
     }
-  }
-
-  onTextContentChange(text) {
-    console.log(text);
   }
 
   loadMorePosts() {

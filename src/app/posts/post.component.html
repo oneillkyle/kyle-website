@@ -1,20 +1,20 @@
 <md-card [ngClass]="{'unpublished': currentDate < post.date}">
-  <md-card-title *ngIf="!editingPost">{{post?.title}}</md-card-title>
+  <md-card-title *ngIf="!editingPost && !noHeader">{{post?.title}}</md-card-title>
 
-  <md-card-subtitle *ngIf="!editingPost">{{post?.date | date}}</md-card-subtitle>
+  <md-card-subtitle *ngIf="!editingPost && !noHeader">{{post?.date | date}}</md-card-subtitle>
 
   <md-card-content>
-    <p *ngIf="!editingPost" class="post-body" [innerHTML]="post.body" style="padding: 25px;"></p>
+    <p *ngIf="!editingPost" class="post-body" [innerHTML]="displayPostBody" style="padding: 25px;"></p>
 
     <form *ngIf="editingPost" (ngSubmit)="postForm.form.valid && createOrUpdatePost()" #postForm="ngForm">
 
       <div>
-        <md-input-container style="width: 500px">
+        <md-input-container style="width: 100%">
           <input mdInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title" width="">
         </md-input-container>
       </div>
       <div>
-        <md-input-container style="width: 500px">
+        <md-input-container style="width: 100%">
           <input mdInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
         </md-input-container>
       </div>

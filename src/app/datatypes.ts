@@ -1,3 +1,5 @@
+import { SafeHtml } from '@angular/platform-browser';
+
 export class User {
   admin: boolean;
   uid: string;
@@ -9,7 +11,7 @@ export class User {
 
 export class Post {
   constructor(
-    public body?: string,
+    public body?: string | SafeHtml,
     public date?: number,
     public title?: string,
     public $key?: string | number
