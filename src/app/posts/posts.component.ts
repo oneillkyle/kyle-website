@@ -9,6 +9,7 @@ import * as _ from 'lodash';
 @Component({
   selector: 'posts',
   templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.scss'],
   providers: [PostService],
 })
 export class PostsComponent implements OnInit, OnDestroy {

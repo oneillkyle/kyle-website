@@ -10,7 +10,11 @@
     </md-toolbar>
 
     <div #root="$implicit" dir="ltr" class="sc-content">
-      <router-outlet></router-outlet>
+      <div class="flex-row">
+        <div class="flex-gutter"></div>
+        <div class="flex-content"><router-outlet></router-outlet></div>
+        <div class="flex-gutter"></div>        
+      </div>
     </div>
   </div>
 </md-sidenav-container>

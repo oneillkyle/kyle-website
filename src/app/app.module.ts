@@ -10,6 +10,7 @@ import { routing } from './routes';
 
 import { AngularFireModule } from 'angularfire2';
 import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
+import { MarkdownModule } from 'angular2-markdown';
 
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './admin/auth-guard.service';
@@ -32,6 +33,7 @@ import { EditorComponent } from './posts/editor.component';
         ReactiveFormsModule,
         MaterialModule,
         BrowserAnimationsModule,
+        MarkdownModule.forRoot(),
         AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
     ],
     declarations: [

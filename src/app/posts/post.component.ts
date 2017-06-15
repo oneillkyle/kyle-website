@@ -11,6 +11,10 @@ declare var tinymce: any;
     `.mat-card-subtitle {
       padding-left: 2px;
     }
+
+    .mat-card-content {
+      margin-top: -20px;
+    }
     
     .post-submits {
       margin-top: 15px;

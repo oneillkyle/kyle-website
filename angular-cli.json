@@ -18,7 +18,8 @@
     "prefix": "app",
     "mobile": false,
     "styles": [
-      "styles.scss"
+      "styles.scss",
+      "../node_modules/prismjs/themes/prism-okaidia.css"
     ],
     "scripts": [
       "../node_modules/hammerjs/hammer.min.js",

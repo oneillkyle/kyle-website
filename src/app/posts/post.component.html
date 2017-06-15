@@ -4,9 +4,10 @@
   <md-card-subtitle *ngIf="!editingPost && !noHeader">{{post?.date | date}}</md-card-subtitle>
 
   <md-card-content>
+    <!--<markdown>{{post.body}}</markdown>    -->
     <p *ngIf="!editingPost" class="post-body" [innerHTML]="displayPostBody" style="padding: 25px;"></p>
 
-    <form *ngIf="editingPost" (ngSubmit)="postForm.form.valid && createOrUpdatePost()" #postForm="ngForm">
+    <form *ngIf="editingPost" (ngSubmit)="createOrUpdatePost()" #postForm="ngForm">
 
       <div>
         <md-input-container style="width: 100%">
@@ -18,7 +19,10 @@
           <input mdInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
         </md-input-container>
       </div>
-      <editor [elementId]="post?.$key || 'new-post'" [(content)]="post.body" (onEditorKeyup)="onTextContentChange($event)">
+      <!--<md-input-container style="width: 100%">
+        <textarea mdInput placeholder="Content" [(ngModel)]="post.body" name="body" rows="20"></textarea>
+      </md-input-container>-->
+      <editor [elementId]="post?.$key || 'new-post'" [(content)]="post.body">
       </editor>
 
       <div class="post-submits">

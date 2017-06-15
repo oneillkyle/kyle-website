@@ -8,18 +8,6 @@
   }
 }
 
-@media (min-width: 680px) {
-  .sc-content {
-    padding: 32px 60px;
-  }
-}
-
-@media (max-width: 679px) {
-  .sc-content {
-    padding: 32px 0;
-  }
-}
-
 .sc-content {
   box-sizing: border-box;
 }
@@ -36,9 +24,18 @@
   }
 }
 
-// h1 {
-//   font-size: 20px;
-// }
+.flex-content {
+  padding: 32px 0;
+  flex: 2 0 80%;
+}
+
+.flex-gutter {
+  flex: 1 2 10%;
+  @media (max-width: 679px) {
+    flex: 0 0 0%;
+  }
+}
+
 // stretch to screen size in fullscreen mode
 .sc-content {
   width: 100%;

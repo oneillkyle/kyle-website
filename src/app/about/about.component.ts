@@ -11,6 +11,7 @@ import { User, Post } from '../datatypes';
 export class AboutComponent implements OnInit {
   public about: Post;
   public user: User;
+  // private pic: 'https://firebasestorage.googleapis.com/v0/b/blinding-torch-7293.appspot.com/o/FB_IMG_1445642626258.jpg?alt=media&token=769187fc-1d15-411b-825c-fd6930f1d4cd'
 
   constructor(
     private aboutService: AboutService,
