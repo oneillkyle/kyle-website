@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AngularFire } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
 
 import { User } from '../datatypes';
 import * as _ from 'lodash';
@@ -10,14 +12,16 @@ export class AuthService {
   private user: User;
   authSubject = new BehaviorSubject({});
 
-  constructor(private af: AngularFire) {
+  constructor(
+    private afAuth: AngularFireAuth,
+    private db: AngularFireDatabase) {
     this.initFirebase();
   }
 
   initFirebase() {
-    this.af.auth.subscribe(auth => {
+    this.afAuth.authState.subscribe(auth => {
       if (auth) {
-        this.af.database.object('/users/' + auth.uid).subscribe(response => {
+        this.db.object('/users/' + auth.uid).valueChanges().subscribe(response => {
           this.user = new User(response);
           this.user.uid = auth.uid;
           this.authSubject.next(this.user);
@@ -42,10 +46,10 @@ export class AuthService {
   }
 
   login() {
-    this.af.auth.login();
+    return this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
   }
 
   logout() {
-    this.af.auth.logout();
+    return this.afAuth.auth.signOut();
   }
 }

@@ -1,60 +1,61 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../datatypes';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable()
 export class PostService {
-  private db;
+  private postsRef: AngularFireList<any>;
+  private db: AngularFireList<any>;
   private posts;
   private postsPerPage = 5;
   public morePosts = true;
 
-  constructor(private af: AngularFire) {
+  constructor(
+    private afDb: AngularFireDatabase,
+    private afs: AngularFirestore
+  ) {
     const date = new Date().getTime();
-    this.db = this.af.database.list('/posts', {
-      query: {
-        orderByChild: 'inverseDate',
-        startAt: -date
-      }
-    });
+    this.postsRef = this.afDb.list('/posts');
+    this.db = this.afDb.list('/posts',
+      ref => ref.orderByChild('inverseDate').startAt(-date)
+    );
   }
 
   create(title: string, body: string, date: number): Observable<any> {
-    return this.db.push({
+    return Observable.fromPromise(this.postsRef.push({
       title,
       body,
       date,
       inverseDate: -date
-    });
+    }));
   }
 
   createOrUpdate(key, { title, body, date }): Observable<any> {
     if (key) {
-      return this.db.update(key, { title, body, date, inverseDate: -date });
+      return  Observable.fromPromise(this.postsRef.update(key, { title, body, date, inverseDate: -date }));
     } else {
-      return this.db.push({ title, body, date, inverseDate: -date });
+      return  Observable.fromPromise(this.postsRef.push({ title, body, date, inverseDate: -date }));
     }
   }
 
   update(id: any, title: string, body: string, date: number): Observable<any> {
-    return this.db.update(id, { title, body, date, inverseDate: -date });
+    return Observable.fromPromise(this.postsRef.update(id, { title, body, date, inverseDate: -date }));
   }
 
   remove(key) {
-    if (key) this.db.remove(key);
+    if (key) this.postsRef.remove(key);
   }
 
-  nextPage(): FirebaseListObservable<Post[]> {
-    return this.db;
-  }
-
-  getAllPosts(): FirebaseListObservable<Post[]> {
-    return this.af.database.list('/posts', {
-      query: {
-        orderByChild: 'inverseDate'
-      }
+  nextPage(): Observable<Post[]> {
+    return this.db.snapshotChanges().map(changes => {
+      return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
     });
+  }
+
+  getAllPosts(): Observable<Post[]> {
+    return this.afDb.list('/posts', ref => ref.orderByChild('inverseDate')).valueChanges();
   }
 
 }

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpModule } from '@angular/http';
 // Imports for loading & configuring the in-memory web api
@@ -9,8 +8,10 @@ import { AppComponent } from './app.component';
 import { routing } from './routes';
 
 import { AngularFireModule } from 'angularfire2';
-import { firebaseConfig, firebaseAuthConfig } from './firebase-config';
+import { firebaseConfig } from './firebase-config';
 import { MarkdownModule } from 'angular2-markdown';
+
+import { SharedModule } from './shared/shared.module';
 
 import { AdminComponent } from './admin/admin.component';
 import { AuthGuard } from './admin/auth-guard.service';
@@ -27,14 +28,12 @@ import { EditorComponent } from './posts/editor.component';
 @NgModule({
     imports: [
         BrowserModule,
-        FormsModule,
         HttpModule,
         routing,
-        ReactiveFormsModule,
-        MaterialModule,
+        SharedModule,
         BrowserAnimationsModule,
         MarkdownModule.forRoot(),
-        AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
+        AngularFireModule.initializeApp(firebaseConfig, 'kyle-website'),
     ],
     declarations: [
         AppComponent,
