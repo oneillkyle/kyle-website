@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../datatypes';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class AboutService {
 
-    private db;
     private posts;
-    constructor(private af: AngularFire) {
-        this.db = this.af.database.object('/about');
+    constructor(private db: AngularFireDatabase) {
     }
 
     set({ title, body, date }): void {
-        this.db.set({
+        this.db.object('/about').set({
             title,
             body,
             date
         });
     }
 
-    get(): FirebaseObjectObservable<Post> {
-        return this.db;
+    get(): Observable<Post> {
+        return this.db.object('/about').valueChanges();
     }
 
 }

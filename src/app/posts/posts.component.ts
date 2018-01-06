@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Post } from '../datatypes';
 import { PostService } from './post.service';
 import { AuthService } from '../admin/auth.service';
 import { PagerComponent } from '../core/pager.component';
-import { FirebaseListObservable } from 'angularfire2';
 import * as _ from 'lodash';
 
 @Component({
@@ -13,7 +13,7 @@ import * as _ from 'lodash';
   providers: [PostService],
 })
 export class PostsComponent implements OnInit, OnDestroy {
-  public posts: FirebaseListObservable<any>;
+  public posts: Observable<Post[]>;
   public enableEdit = false;
   public morePosts = false;
 

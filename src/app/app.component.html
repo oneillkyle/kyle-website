@@ -1,15 +1,15 @@
-<md-sidenav-container fullscreen>
+<mat-sidenav-container fullscreen>
   <div>
-    <md-toolbar color="primary">
-      <h2>Kyle O'Neill</h2>
+    <mat-toolbar color="primary">
+      <h2 routerLink="/">Kyle O'Neill</h2>
       <div class="sc-toolbar">
-        <a md-button routerLink="/blog" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
-        <a md-button routerLink="/about" routerLinkActive="active">About</a>
-        <a *ngIf="user" md-button (click)="signOut()">Sign Out</a>
+        <a mat-button routerLink="/blog" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
+        <!-- <a mat-button routerLink="/about" routerLinkActive="active">About</a> -->
+        <a *ngIf="user" mat-button (click)="signOut()">Sign Out</a>
       </div>
-    </md-toolbar>
+    </mat-toolbar>
 
-    <div #root="$implicit" dir="ltr" class="sc-content">
+    <div dir="ltr" class="sc-content">
       <div class="flex-row">
         <div class="flex-gutter"></div>
         <div class="flex-content"><router-outlet></router-outlet></div>
@@ -17,4 +17,4 @@
       </div>
     </div>
   </div>
-</md-sidenav-container>
+</mat-sidenav-container>
