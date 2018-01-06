@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Post } from '../datatypes';
 import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
-import { AngularFirestore } from 'angularfire2/firestore';
 
 @Injectable()
 export class PostService {
@@ -13,8 +12,7 @@ export class PostService {
   public morePosts = true;
 
   constructor(
-    private afDb: AngularFireDatabase,
-    private afs: AngularFirestore
+    private afDb: AngularFireDatabase
   ) {
     const date = new Date().getTime();
     this.postsRef = this.afDb.list('/posts');

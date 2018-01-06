@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { routing } from './routes';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireDatabaseModule  } from 'angularfire2/database';
 import { firebaseConfig } from './firebase-config';
 import { MarkdownModule } from 'angular2-markdown';
 
@@ -34,6 +36,8 @@ import { EditorComponent } from './posts/editor.component';
         BrowserAnimationsModule,
         MarkdownModule.forRoot(),
         AngularFireModule.initializeApp(firebaseConfig, 'kyle-website'),
+        AngularFireAuthModule,
+        AngularFireDatabaseModule
     ],
     declarations: [
         AppComponent,
