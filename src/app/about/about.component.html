@@ -1,9 +1,25 @@
-<div>
-  <post *ngIf="about"
-    [enableEdit]="user?.admin"
-    [enableDelete]="false"
-    [post]="about"
-    (onPostSave)="updatePost($event)"
-    noHeader="true">
-  </post>
-</div>
+<mat-card>
+  <mat-card-content>
+    <img class="profile-image" src="https://firebasestorage.googleapis.com/v0/b/blinding-torch-7293.appspot.com/o/FB_IMG_1445642626258.jpg?alt=media&token=769187fc-1d15-411b-825c-fd6930f1d4cd">
+    <div class="body-text">
+      I am a full-stack software engineer primarily working with Angular and Python/Django.
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <div class="links">
+      <a class="link" href="https://twitter.com/oneillMkyle">
+        <i class="fab fa-twitter fa-2x"></i>
+      </a>
+      <a class="link" href="https://github.com/oneillkyle">
+        <i class="fab fa-github fa-2x"></i>
+      </a>
+      <a class="link" href="https://www.linkedin.com/in/kyle-oneill/">
+        <i class="fab fa-linkedin fa-2x"></i>
+      </a>
+    </div>
+  </mat-card-actions>
+
+  <mat-card-footer></mat-card-footer>
+
+</mat-card>

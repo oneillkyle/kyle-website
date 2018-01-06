@@ -11,16 +11,16 @@
 
       <div>
         <mat-input-container style="width: 100%">
-          <input mdInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title" width="">
+          <input matInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title" width="">
         </mat-input-container>
       </div>
       <div>
         <mat-input-container style="width: 100%">
-          <input mdInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
+          <input matInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
         </mat-input-container>
       </div>
       <!--<mat-input-container style="width: 100%">
-        <textarea mdInput placeholder="Content" [(ngModel)]="post.body" name="body" rows="20"></textarea>
+        <textarea matInput placeholder="Content" [(ngModel)]="post.body" name="body" rows="20"></textarea>
       </mat-input-container>-->
       <editor [elementId]="post?.$key || 'new-post'" [(content)]="post.body">
       </editor>

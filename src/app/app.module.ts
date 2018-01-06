@@ -26,6 +26,7 @@ import { AboutComponent } from './about/about.component';
 import { SideNavComponent } from './core/side-nav.component';
 import { PostService } from './posts/post.service';
 import { EditorComponent } from './posts/editor.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
     imports: [
@@ -47,7 +48,8 @@ import { EditorComponent } from './posts/editor.component';
         PostsComponent,
         AboutComponent,
         SideNavComponent,
-        EditorComponent
+        EditorComponent,
+        HomeComponent
     ],
     providers: [
         AuthGuard,
