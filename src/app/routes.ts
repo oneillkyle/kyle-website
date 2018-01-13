@@ -16,10 +16,6 @@ const appRoutes: Routes = [
         path: 'about',
         component: AboutComponent,
     },
-    {
-        path: ':id',
-        component: PostsComponent
-    },
     // {
     //     path: 'about',
     //     component: AboutComponent
@@ -34,6 +30,10 @@ const appRoutes: Routes = [
         path: '',
         pathMatch: 'full',
         component: PostsComponent,
+    },
+    {
+        path: ':id',
+        component: PostsComponent
     },
     { path: '**', redirectTo: '' }
 

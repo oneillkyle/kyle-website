@@ -8,7 +8,12 @@ declare var tinymce: any;
   selector: 'post',
   templateUrl: './post.component.html',
   styles: [
-    `.mat-card-subtitle {
+    `
+    .mat-card-title {
+      font-size: 24px;
+    }
+
+    .mat-card-subtitle {
       padding-left: 2px;
     }
 
@@ -23,6 +28,13 @@ declare var tinymce: any;
 
     .post-actions {
       margin-left: 10px;
+    }
+
+    .header-actions {
+      flex: 1 1 auto;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
     }
 
     .truncate {
@@ -55,6 +67,8 @@ export class PostComponent implements OnInit {
   onDeletePost: EventEmitter<any> = new EventEmitter();
   @Output()
   onMorePosts: EventEmitter<any> = new EventEmitter();
+  @Output()
+  onCancelEdit: EventEmitter<any> = new EventEmitter();
 
   dateOptions = {};
   date;
@@ -101,6 +115,11 @@ export class PostComponent implements OnInit {
         key: _.get(this.post, '$key', null)
       });
     }
+  }
+
+  cancelEdit() {
+    this.editingPost = false;
+    this.onCancelEdit.emit(this.post);
   }
 
   loadMorePosts() {
