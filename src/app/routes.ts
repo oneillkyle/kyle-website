@@ -13,13 +13,13 @@ import { HomeComponent } from './home/home.component';
 
 const appRoutes: Routes = [
     {
-        path: 'blog',
-        component: PostsComponent,
+        path: 'about',
+        component: AboutComponent,
     },
-    // {
-    //     path: 'blog/:id',
-    //     component: PostsComponent
-    // },
+    {
+        path: ':id',
+        component: PostsComponent
+    },
     // {
     //     path: 'about',
     //     component: AboutComponent
@@ -33,9 +33,9 @@ const appRoutes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        component: AboutComponent,
+        component: PostsComponent,
     },
-    { path: '**', redirectTo: 'blog' }
+    { path: '**', redirectTo: '' }
 
 ];
 

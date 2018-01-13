@@ -15,14 +15,19 @@ declare var tinymce: any;
     .mat-card-content {
       margin-top: -20px;
     }
-    
+
     .post-submits {
       margin-top: 15px;
       margin-left: 5px;
     }
-    
+
     .post-actions {
       margin-left: 10px;
+    }
+
+    .truncate {
+      max-height: 250px;
+      overflow-y: hidden;
     }`
   ],
   providers: [],
@@ -38,6 +43,12 @@ export class PostComponent implements OnInit {
   morePosts = false;
   @Input()
   noHeader = false;
+  @Input()
+  truncate = false;
+  @Input()
+  editingPost = false;
+  @Input()
+  newPost = false;
   @Output()
   onPostSave: EventEmitter<any> = new EventEmitter();
   @Output()
@@ -46,10 +57,8 @@ export class PostComponent implements OnInit {
   onMorePosts: EventEmitter<any> = new EventEmitter();
 
   dateOptions = {};
-  editingPost = false;
   date;
   formattedDate;
-  newPost = false;
   currentDate;
   get displayPostBody() {
     return  this.sanitizer.bypassSecurityTrustHtml(this.post.body as string);

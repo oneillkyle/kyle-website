@@ -13,7 +13,6 @@ import { User, Post } from '../datatypes';
         margin: 0 auto;
       }
       .body-text {
-        text-align: center;
         margin-top: 20px;
       }
       .links {
@@ -28,6 +27,18 @@ import { User, Post } from '../datatypes';
         padding: 1em;
         text-align: center;
         color: black;
+      }
+      .about-image {
+        // border-top-left-radius: 50%;
+        // border-top-right-radius: 50%;
+        // border-bottom-right-radius: 50%;
+        // border-bottom-left-radius: 50%;
+        background-image: url('../../assets/profile_image.jpg');
+        background-size: cover;
+      }
+      .about-card {
+        width: 400px;
+        margin: auto;
       }
     `
   ],

@@ -1,9 +1,9 @@
 <mat-sidenav-container fullscreen>
   <div>
-    <mat-toolbar color="primary">
-      <h2 routerLink="/">Kyle O'Neill</h2>
+    <mat-toolbar>
+      <h2 class="brand" routerLink="/"><a>Kyle O'Neill</a></h2>
       <div class="sc-toolbar">
-        <a mat-button routerLink="/blog" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
+        <a mat-button routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
         <!-- <a mat-button routerLink="/about" routerLinkActive="active">About</a> -->
         <a *ngIf="user" mat-button (click)="signOut()">Sign Out</a>
       </div>

@@ -34,7 +34,7 @@ export class EditorComponent implements AfterViewInit, OnDestroy, OnInit {
       plugins: ['link', 'paste', 'table', 'image', 'spellchecker'],
       // toolbar: ['image', 'spellchecker'],
       // menubar: 'tools',
-      skin_url: 'assets/skins/lightgray',
+      skin_url: '/assets/skins/lightgray',
       height: '500',
       setup: editor => {
         this.editor = editor;

@@ -56,4 +56,11 @@ export class PostService {
     return this.afDb.list('/posts', ref => ref.orderByChild('inverseDate')).valueChanges();
   }
 
+  getSinglePost(id: string): Observable<Post> {
+    return this.afDb.object(`/posts/${id}`).valueChanges().map((post: Post) => {
+      post.key = id;
+      return post;
+    });
+  }
+
 }

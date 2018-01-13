@@ -1,9 +1,10 @@
 <mat-card [ngClass]="{'unpublished': currentDate < post.date}">
-  <mat-card-title *ngIf="!editingPost && !noHeader">{{post?.title}}</mat-card-title>
+  <!-- <mat-card-header> -->
+    <mat-card-title *ngIf="!editingPost && !noHeader">{{post?.title}}</mat-card-title>
 
-  <mat-card-subtitle *ngIf="!editingPost && !noHeader">{{post?.date | date}}</mat-card-subtitle>
-
-  <mat-card-content>
+    <mat-card-subtitle *ngIf="!editingPost && !noHeader">{{post?.date | date}}</mat-card-subtitle>
+  <!-- </mat-card-header> -->
+  <mat-card-content [ngClass]="{'truncate': truncate && !editingPost}">
     <!--<markdown>{{post.body}}</markdown>    -->
     <p *ngIf="!editingPost" class="post-body" [innerHTML]="displayPostBody" style="padding: 25px;"></p>
 
@@ -32,13 +33,17 @@
     </form>
   </mat-card-content>
 
-  <mat-card-actions *ngIf="enableEdit || morePosts" class="post-actions">
+  <mat-card-actions class="post-actions">
     <button *ngIf="enableEdit && !newPost &&! editingPost" (click)='editPost()' mat-raised-button color="primary">
       Edit
     </button>
     <button *ngIf="enableDelete &&! editingPost" (click)='deletePost()' mat-raised-button color="warn">
       Delete
     </button>
+    <a *ngIf="truncate" mat-button [routerLink]="[post.key]" color="primary">Continue Reading
+      <mat-icon>arrow_forward</mat-icon>
+    </a>
+    <a *ngIf="!truncate" mat-button routerLink="../" color="primary">Back to Posts</a>
     <button *ngIf="morePosts" (click)="loadMorePosts()" mat-raised-button color="primary">
       Load more posts
     </button>

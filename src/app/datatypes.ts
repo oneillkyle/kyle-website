@@ -14,6 +14,7 @@ export class Post {
     public body?: string | SafeHtml,
     public date?: number,
     public title?: string,
-    public $key?: string | number
+    public $key?: string | number,
+    public key?: string | number
   ) {}
 }
