@@ -21,7 +21,6 @@
   </mat-card-header>
 
   <mat-card-content [ngClass]="{'truncate': truncate && !editingPost}">
-    <!-- <p *ngIf="!editingPost" class="post-body" [innerHTML]="displayPostBody" style="padding: 25px;"></p> -->
     <form class="post-form" *ngIf="editingPost" #postForm="ngForm">
 
       <div>
@@ -34,11 +33,7 @@
           <input matInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
         </mat-input-container>
       </div>
-      <!--<mat-input-container style="width: 100%">
-        <textarea matInput placeholder="Content" [(ngModel)]="post.body" name="body" rows="20"></textarea>
-      </mat-input-container>-->
       <textarea matInput matTextareaAutosize matAutosizeMinRows="2" [(ngModel)]="post.body" name="postBody"></textarea>
-      <!-- <editor [elementId]="post?.$key || 'new-post'" [(content)]="post.body"></editor> -->
     </form>
     <markdown [data]="post.body"></markdown>
 
