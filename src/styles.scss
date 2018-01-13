@@ -1,4 +1,5 @@
 @import '~@angular/material/theming';
+@import "~prismjs/themes/prism.css";
 @include mat-core();
 $primary: mat-palette($mat-indigo, 500);
 $accent: mat-palette($mat-amber, 300);

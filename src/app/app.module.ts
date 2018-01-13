@@ -11,7 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule  } from 'angularfire2/database';
 import { firebaseConfig } from './firebase-config';
-import { MarkdownModule } from 'angular2-markdown';
+import { MarkdownModule } from 'ngx-md';
 
 import { SharedModule } from './shared/shared.module';
 

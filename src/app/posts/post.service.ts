@@ -58,12 +58,8 @@ export class PostService {
 
   getSinglePost(id: string): Observable<Post> {
     return this.afDb.object(`/posts/${id}`).valueChanges().map((post: Post) => {
-      console.log(post);
-      post.key = id;
+      if (post) post.key = id;
       return post;
-    }).catch(err => {
-      console.log(err)
-      return Observable.of(null);
     });
   }
 
