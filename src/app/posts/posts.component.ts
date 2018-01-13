@@ -6,7 +6,7 @@ import { PostService } from './post.service';
 import { AuthService } from '../admin/auth.service';
 import { PagerComponent } from '../core/pager.component';
 import * as _ from 'lodash';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'posts',
@@ -28,7 +28,8 @@ export class PostsComponent implements OnInit, OnDestroy {
   constructor(
     private postService: PostService,
     private authService: AuthService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -42,14 +43,17 @@ export class PostsComponent implements OnInit, OnDestroy {
   getUser() {
     this.authSub = this.authService.getAuth().subscribe(user => {
       this.user = user;
-      if (_.get(this.user, 'admin')) this.posts = this.postService.getAllPosts();
+      // if (_.get(this.user, 'admin')) this.posts = this.postService.getAllPosts();
     });
   }
 
   getSinglePost(id: string) {
     this.posts = null;
     // this.post = this.postService.getSinglePost(id);
-    this.postService.getSinglePost(id).pipe(first()).subscribe(post => this.post = post);
+    this.postService.getSinglePost(id).pipe(first()).subscribe(post => {
+      if (!post) this.router.navigate(['/']);
+      this.post = post
+    });
   }
 
   getAllPosts() {

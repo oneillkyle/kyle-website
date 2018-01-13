@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angu
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Post } from '../datatypes';
 import * as _ from 'lodash';
-declare var tinymce: any;
 
 @Component({
   selector: 'post',
@@ -18,7 +17,6 @@ declare var tinymce: any;
     }
 
     .mat-card-content {
-      margin-top: -20px;
     }
 
     .post-submits {
@@ -35,6 +33,11 @@ declare var tinymce: any;
       display: flex;
       justify-content: flex-end;
       flex-direction: row;
+    }
+
+    .post-form {
+      border-bottom: black 1px solid;
+      margin-bottom: 60px;
     }
 
     .truncate {
@@ -99,8 +102,8 @@ export class PostComponent implements OnInit {
   createOrUpdatePost() {
     this.post.date = new Date(this.formattedDate).getTime();
     this.onPostSave.emit({
-      key: _.get(this.post, '$key', null),
-      post: _.omit(this.post, '$key')
+      key: _.get(this.post, 'key', null),
+      post: _.omit(this.post, 'key')
     });
     if (this.newPost) {
       this.post = {};
@@ -112,7 +115,7 @@ export class PostComponent implements OnInit {
   deletePost() {
     if (confirm('Are you sure you want to delete?')) {
       this.onDeletePost.emit({
-        key: _.get(this.post, '$key', null)
+        key: _.get(this.post, 'key', null)
       });
     }
   }
