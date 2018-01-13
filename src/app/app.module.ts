@@ -25,7 +25,6 @@ import { PostsComponent } from './posts/posts.component';
 import { AboutComponent } from './about/about.component';
 import { SideNavComponent } from './core/side-nav.component';
 import { PostService } from './posts/post.service';
-import { EditorComponent } from './posts/editor.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
@@ -48,7 +47,6 @@ import { HomeComponent } from './home/home.component';
         PostsComponent,
         AboutComponent,
         SideNavComponent,
-        EditorComponent,
         HomeComponent
     ],
     providers: [

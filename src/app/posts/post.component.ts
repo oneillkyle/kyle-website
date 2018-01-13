@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angu
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Post } from '../datatypes';
 import * as _ from 'lodash';
-declare var tinymce: any;
 
 @Component({
   selector: 'post',
