@@ -30,11 +30,12 @@ export class PostService {
     }));
   }
 
-  createOrUpdate(key, { title, body, date }): Observable<any> {
+  createOrUpdate(key, { title, body, date, image }): Observable<any> {
+    const post = { title, body, date, image: image || null, inverseDate: -date }
     if (key) {
-      return  Observable.fromPromise(this.postsRef.update(key, { title, body, date, inverseDate: -date }));
+      return  Observable.fromPromise(this.postsRef.update(key, post));
     } else {
-      return  Observable.fromPromise(this.postsRef.push({ title, body, date, inverseDate: -date }));
+      return  Observable.fromPromise(this.postsRef.push(post));
     }
   }
 
