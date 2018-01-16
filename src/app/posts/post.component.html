@@ -20,6 +20,8 @@
     </div>
   </mat-card-header>
 
+  <img *ngIf="post.image" mat-card-image [src]="post.image" alt="Post photo">
+
   <mat-card-content [ngClass]="{'truncate': truncate && !editingPost}">
     <form class="post-form" *ngIf="editingPost" #postForm="ngForm">
 
@@ -27,10 +29,11 @@
         <mat-input-container style="width: 100%">
           <input matInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title" width="">
         </mat-input-container>
-      </div>
-      <div>
         <mat-input-container style="width: 100%">
           <input matInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
+        </mat-input-container>
+        <mat-input-container style="width: 100%">
+          <input matInput type="text" [(ngModel)]="post.image" placeholder="Image Url" name="image" width="">
         </mat-input-container>
       </div>
       <textarea matInput matTextareaAutosize matAutosizeMinRows="2" [(ngModel)]="post.body" name="postBody"></textarea>
