@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { Post } from '../datatypes';
 import { AngularFireDatabase, AngularFireList  } from 'angularfire2/database';
 

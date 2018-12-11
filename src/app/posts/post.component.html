@@ -26,15 +26,15 @@
     <form class="post-form" *ngIf="editingPost" #postForm="ngForm">
 
       <div>
-        <mat-input-container style="width: 100%">
+        <mat-form-field style="width: 100%">
           <input matInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title" width="">
-        </mat-input-container>
-        <mat-input-container style="width: 100%">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
           <input matInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
-        </mat-input-container>
-        <mat-input-container style="width: 100%">
+        </mat-form-field>
+        <mat-form-field style="width: 100%">
           <input matInput type="text" [(ngModel)]="post.image" placeholder="Image Url" name="image" width="">
-        </mat-input-container>
+        </mat-form-field>
       </div>
       <textarea matInput matTextareaAutosize matAutosizeMinRows="2" [(ngModel)]="post.body" name="postBody"></textarea>
     </form>
