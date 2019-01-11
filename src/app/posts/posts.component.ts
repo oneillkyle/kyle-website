@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { Post } from '../datatypes';
@@ -9,12 +9,15 @@ import * as _ from 'lodash';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'posts',
+  selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss'],
   providers: [PostService],
 })
 export class PostsComponent implements OnInit, OnDestroy {
+  @Input()
+  endpoint: string;
+
   public posts: Observable<Post[]>;
   public post: Post;
   public enableEdit = false;
@@ -29,10 +32,10 @@ export class PostsComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private authService: AuthService,
     private route: ActivatedRoute,
-    private router: Router) {
-  }
+    private router: Router) {}
 
   ngOnInit() {
+    this.postService.setEndpoint(this.endpoint);
     this.getUser();
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');

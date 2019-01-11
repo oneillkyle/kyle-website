@@ -3,8 +3,9 @@
     <mat-toolbar>
       <h2 class="brand" routerLink="/"><a>Kyle O'Neill</a></h2>
       <div class="sc-toolbar">
-        <a mat-button routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
+        <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
         <a mat-button routerLink="/books" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Books</a>
+        <a mat-button routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
         <!-- <a mat-button routerLink="/about" routerLinkActive="active">About</a> -->
         <a *ngIf="user" mat-button (click)="signOut()">Sign Out</a>
       </div>

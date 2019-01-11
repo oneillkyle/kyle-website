@@ -10,12 +10,16 @@ export class PostService {
   private db: AngularFireList<any>;
   private posts;
   private postsPerPage = 5;
+  private endpoint: string;
   public morePosts = true;
 
-  constructor(private afDb: AngularFireDatabase) {
+  constructor(private afDb: AngularFireDatabase) {}
+
+  setEndpoint(endpoint: string) {
+    this.endpoint = endpoint;
     const date = new Date().getTime();
-    this.postsRef = this.afDb.list('/posts');
-    this.db = this.afDb.list('/posts', ref =>
+    this.postsRef = this.afDb.list(`/${endpoint}`);
+    this.db = this.afDb.list(`/${endpoint}`, ref =>
       ref.orderByChild('inverseDate').startAt(-date)
     );
   }
@@ -66,13 +70,13 @@ export class PostService {
 
   getAllPosts(): Observable<Post[]> {
     return this.afDb
-      .list('/posts', ref => ref.orderByChild('inverseDate'))
+      .list(`/${this.endpoint}`, ref => ref.orderByChild('inverseDate'))
       .valueChanges();
   }
 
   getSinglePost(id: string): Observable<Post> {
     return this.afDb
-      .object(`/posts/${id}`)
+      .object(`/${this.endpoint}/${id}`)
       .valueChanges()
       .pipe(
         map((post: Post) => {
