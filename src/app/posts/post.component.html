@@ -38,7 +38,7 @@
       </div>
       <textarea matInput matTextareaAutosize matAutosizeMinRows="2" [(ngModel)]="post.body" name="postBody"></textarea>
     </form>
-    <markdown [data]="post.body"></markdown>
+    <ngx-md [data]="post.body"></ngx-md>
 
   </mat-card-content>
 

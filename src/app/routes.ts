@@ -16,14 +16,14 @@ const appRoutes: Routes = [
         path: 'about',
         component: AboutComponent,
     },
-    // {
-    //     path: 'about',
-    //     component: AboutComponent
-    // },
     {
         path: 'admin',
         component: AdminComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'books',
+        component: PostsComponent
     },
     { path: 'login', component: LoginComponent },
     {
