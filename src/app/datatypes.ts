@@ -32,7 +32,6 @@ export class BookRating {
     public reviewLink?: string,
     public image?: string,
     public inverseDate?: number,
-    public key?: string | number,
-    public id?: string | number
+    public key?: string
   ) {}
 }

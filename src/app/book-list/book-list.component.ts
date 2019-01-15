@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
 
 import { AuthService } from '../admin/auth.service';
 import { BookRating } from '../datatypes';
 
 import { BookListService } from './book-list.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BookEditComponent } from './book-edit/book-edit.component';
 
 @Component({
   selector: 'app-book-list',
@@ -20,8 +21,6 @@ export class BookListComponent implements OnInit {
   public morePosts = false;
   public creatingPost = false;
 
-  form: FormGroup;
-
   user;
   admin;
   authSub;
@@ -29,13 +28,12 @@ export class BookListComponent implements OnInit {
   constructor(
     private bookListService: BookListService,
     private authService: AuthService,
-    private formBuilder: FormBuilder
-  ) { }
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.bookListService.setEndpoint('book-list');
     this.getUser();
-    this.form = this.newForm();
   }
 
   getUser() {
@@ -50,29 +48,37 @@ export class BookListComponent implements OnInit {
     this.nextPage();
   }
 
-  createOrUpdateBook({ key, book }) {
-    this.bookListService.createOrUpdate(key, book);
+  createOrUpdateBook(book: BookRating) {
+    this.bookListService.createOrUpdate(book);
   }
 
   deleteBook(book) {
-    this.bookListService.remove(book.id);
+    this.bookListService.remove(book.key);
   }
 
   nextPage() {
     this.books = this.bookListService.nextPage();
   }
 
-  newForm() {
-    return this.formBuilder.group({
-      title: ['', Validators.required],
-      author: ['', Validators.required],
-      date: [null, Validators.required],
-      rating: [0, Validators.required],
-      audio: [false],
-      purchaseLink: ['', Validators.required],
-      reviewLink: [],
-      image: []
-    });
+  transformTime(time) {
+    const timeStamp = new Date(time);
+    return (
+      timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString()
+    );
   }
 
+  openDialog(data: BookRating): void {
+    const dialogRef = this.dialog.open(BookEditComponent, {
+      width: '600px',
+      data
+    });
+
+    dialogRef.afterClosed().subscribe((result?: {book: BookRating, action: 'save'|'delete'}) => {
+      console.log('The dialog was closed');
+      console.log(result);
+      if (result) {
+        result.action === 'delete' ? this.deleteBook(result.book) : this.createOrUpdateBook(result.book);
+      }
+    });
+  }
 }

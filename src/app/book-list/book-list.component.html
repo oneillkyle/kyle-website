@@ -7,20 +7,13 @@
 
   <mat-card-content>
     <mat-list>
-      <mat-list-item *ngFor="let book of books | async">{{ book | json }}</mat-list-item>
+      <mat-list-item *ngFor="let book of (books | async)">
+        {{ book | json }}
+      </mat-list-item>
     </mat-list>
   </mat-card-content>
 </mat-card>
 
-<div *ngIf="admin">
-  <form [formGroup]="form">
-      title
-      author
-      date
-      rating
-      audio
-      purchaseLink
-      reviewLink
-      image
-  </form>
-</div>
+<button type="button" (click)="openDialog({})">Open Dialog</button>
+
+<!-- <app-book-edit></app-book-edit> -->

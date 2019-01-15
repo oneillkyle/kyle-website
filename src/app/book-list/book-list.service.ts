@@ -33,22 +33,24 @@ export class BookListService {
     );
   }
 
-  createOrUpdate(key, rating: BookRating): Observable<any> {
-    const post = {
+  createOrUpdate(rating: BookRating): Observable<any> {
+    const key = rating.key;
+    const book = {
       ...rating,
       image: rating.image || null,
       inverseDate: -rating.date
     };
+    delete book.key;
     if (key) {
-      return from(this.postsRef.update(key, post));
+      return from(this.postsRef.update(key, book));
     } else {
-      return from(this.postsRef.push(post));
+      return from(this.postsRef.push(book));
     }
   }
 
-  update(id, rating: BookRating): Observable<any> {
+  update(key, rating: BookRating): Observable<any> {
     return from(
-      this.postsRef.update(id, {
+      this.postsRef.update(key, {
         ...rating,
         inverseDate: -rating.date
       })
@@ -63,7 +65,7 @@ export class BookListService {
     return this.db.snapshotChanges().pipe(
       map(changes => {
         return changes.map(c => ({
-          // key: c.payload.key,
+          key: c.payload.key,
           ...c.payload.val() }));
       })
     );
@@ -75,13 +77,13 @@ export class BookListService {
       .valueChanges();
   }
 
-  getSinglePost(id: string): Observable<BookRating> {
+  getSinglePost(key: string): Observable<BookRating> {
     return this.afDb
-      .object(`/${this.endpoint}/${id}`)
+      .object(`/${this.endpoint}/${key}`)
       .valueChanges()
       .pipe(
         map((post: BookRating) => {
-          // if (post) post.key = id;
+          if (post) post.key = key;
           return post;
         })
       );

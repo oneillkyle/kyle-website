@@ -30,6 +30,7 @@ import { HomeComponent } from './home/home.component';
 import { BlogComponent } from './blog/blog.component';
 import { BooksComponent } from './books/books.component';
 import { BookListComponent } from './book-list/book-list.component';
+import { BookEditComponent} from './book-list/book-edit/book-edit.component';
 
 @NgModule({
     imports: [
@@ -54,12 +55,16 @@ import { BookListComponent } from './book-list/book-list.component';
         HomeComponent,
         BlogComponent,
         BooksComponent,
-        BookListComponent
+        BookListComponent,
+        BookEditComponent
     ],
     providers: [
         AuthGuard,
         AuthService,
         BookListService
+    ],
+    entryComponents: [
+        BookEditComponent
     ],
     bootstrap: [AppComponent]
 })
