@@ -25,6 +25,7 @@ import { PostsComponent } from './posts/posts.component';
 import { AboutComponent } from './about/about.component';
 import { SideNavComponent } from './core/side-nav.component';
 import { PostService } from './posts/post.service';
+import { BookListService } from './book-list/book-list.service';
 import { HomeComponent } from './home/home.component';
 import { BlogComponent } from './blog/blog.component';
 import { BooksComponent } from './books/books.component';
@@ -58,6 +59,7 @@ import { BookListComponent } from './book-list/book-list.component';
     providers: [
         AuthGuard,
         AuthService,
+        BookListService
     ],
     bootstrap: [AppComponent]
 })

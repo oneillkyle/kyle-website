@@ -24,24 +24,20 @@ export class BookListService {
     );
   }
 
-  create(title: string, body: string, date: number): Observable<any> {
+  create(rating: BookRating): Observable<any> {
     return from(
       this.postsRef.push({
-        title,
-        body,
-        date,
-        inverseDate: -date
+        ...rating,
+        inverseDate: -rating.date
       })
     );
   }
 
-  createOrUpdate(key, { title, body, date, image }): Observable<any> {
+  createOrUpdate(key, rating: BookRating): Observable<any> {
     const post = {
-      title,
-      body,
-      date,
-      image: image || null,
-      inverseDate: -date
+      ...rating,
+      image: rating.image || null,
+      inverseDate: -rating.date
     };
     if (key) {
       return from(this.postsRef.update(key, post));
@@ -50,9 +46,12 @@ export class BookListService {
     }
   }
 
-  update(id: any, title: string, body: string, date: number): Observable<any> {
+  update(id, rating: BookRating): Observable<any> {
     return from(
-      this.postsRef.update(id, { title, body, date, inverseDate: -date })
+      this.postsRef.update(id, {
+        ...rating,
+        inverseDate: -rating.date
+      })
     );
   }
 
@@ -60,27 +59,29 @@ export class BookListService {
     if (key) this.postsRef.remove(key);
   }
 
-  nextPage(): Observable<Post[]> {
+  nextPage(): Observable<BookRating[]> {
     return this.db.snapshotChanges().pipe(
       map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        return changes.map(c => ({
+          // key: c.payload.key,
+          ...c.payload.val() }));
       })
     );
   }
 
-  getAllPosts(): Observable<Post[]> {
+  getAllPosts(): Observable<{}[]> {
     return this.afDb
       .list(`/${this.endpoint}`, ref => ref.orderByChild('inverseDate'))
       .valueChanges();
   }
 
-  getSinglePost(id: string): Observable<Post> {
+  getSinglePost(id: string): Observable<BookRating> {
     return this.afDb
       .object(`/${this.endpoint}/${id}`)
       .valueChanges()
       .pipe(
-        map((post: Post) => {
-          if (post) post.key = id;
+        map((post: BookRating) => {
+          // if (post) post.key = id;
           return post;
         })
       );

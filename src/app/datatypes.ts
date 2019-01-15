@@ -25,11 +25,14 @@ export class BookRating {
     public title: string,
     public author: string,
     public date: number,
+    public year: number,
     public rating: number,
     public audio: boolean,
     public purchaseLink: string,
     public reviewLink?: string,
     public image?: string,
-    public key?: string | number
+    public inverseDate?: number,
+    public key?: string | number,
+    public id?: string | number
   ) {}
 }
