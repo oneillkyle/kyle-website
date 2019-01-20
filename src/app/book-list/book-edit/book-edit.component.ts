@@ -30,8 +30,13 @@ export class BookEditComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.newForm();
-    this.form.patchValue(this.data);
-    console.log(this.form);
+    const date = this.data.date ? {
+      date: new Date(this.data.date)
+    } : {};
+    this.form.patchValue({
+      ...this.data,
+      ...date
+    });
   }
 
   saveBook() {
@@ -42,14 +47,12 @@ export class BookEditComponent implements OnInit {
       inverseDate: -date.getTime(),
       year: date.getFullYear()
     };
-    console.log(book);
     if (this.form.valid) {
       this.dialogRef.close({book, action: 'save'});
     }
   }
 
   deleteBook() {
-    console.log(this.book);
     this.dialogRef.close({book: this.book, action: 'delete'});
   }
 

@@ -75,10 +75,12 @@ export class BookListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result?: {book: BookRating, action: 'save'|'delete'}) => {
-      console.log('The dialog was closed');
-      console.log(result);
       if (result) {
-        result.action === 'delete' ? this.deleteBook(result.book) : this.createOrUpdateBook(result.book);
+        if (result.action === 'delete') {
+          this.deleteBook(result.book);
+        } else if (result.action === 'save') {
+          this.createOrUpdateBook(result.book);
+        }
       }
     });
   }

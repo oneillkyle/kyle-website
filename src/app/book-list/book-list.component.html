@@ -1,14 +1,14 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Book List</mat-card-title>
+    <mat-card-title>Reading List</mat-card-title>
 
-    <mat-card-subtitle>Books read to date</mat-card-subtitle>
+    <mat-card-subtitle>Books read starting 2019</mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let book of (books | async)">
-        <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+        <mat-icon mat-list-icon *ngIf="user?.admin" (click)="openDialog(book)">edit</mat-icon>
         <h4 mat-line>
           <img *ngIf="book.image" [src]="book.image" alt="Book photo" style="height: 40px; width: 40px;">
           <a [href]="book.purchaseLink" target="_blank">
@@ -24,8 +24,10 @@
       </mat-list-item>
     </mat-list>
   </mat-card-content>
+  <mat-card-actions *ngIf="user?.admin">
+    <button mat-button *ngIf="user?.admin" type="button" (click)="openDialog({})">Add Book</button>
+  </mat-card-actions>
 </mat-card>
 
-<button *ngIf="admin" type="button" (click)="openDialog({})">Open Dialog</button>
 
 <!-- <app-book-edit></app-book-edit> -->

@@ -27,17 +27,20 @@ const appRoutes: Routes = [
         path: 'books',
         component: BooksComponent
     },
+    {
+        path: 'books/:id',
+        component: BlogComponent
+    },
     { path: 'login', component: LoginComponent },
     {
-        path: '',
-        pathMatch: 'full',
+        path: 'blog',
         component: BlogComponent,
     },
     {
-        path: ':id',
+        path: 'blog/:id',
         component: BlogComponent
     },
-    { path: '**', redirectTo: '' }
+    { path: '**', redirectTo: 'blog' }
 
 ];
 

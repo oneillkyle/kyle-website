@@ -10,6 +10,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
           *ngFor="let n of range; let $index = index"
           class="to-rate"
           (click)="mark($index)"
+          color="primary"
         >
           {{ isMarked($index) }}
         </mat-icon>
@@ -18,6 +19,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
         <mat-icon
           *ngFor="let n of range; let $index = index"
           class="to-display"
+          color="primary"
         >
           {{ isMarked($index) }}
         </mat-icon>

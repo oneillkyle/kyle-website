@@ -29,9 +29,20 @@
         <mat-form-field style="width: 100%">
           <input matInput type="text" [(ngModel)]="post.title" placeholder="Title" name="title" width="">
         </mat-form-field>
-        <mat-form-field style="width: 100%">
+        <div>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Publish Date"
+            [(ngModel)]="date"
+            name="date"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <!-- <mat-form-field style="width: 100%">
           <input matInput type="text" [(ngModel)]="formattedDate" placeholder="Publish Date" name="date">
-        </mat-form-field>
+        </mat-form-field> -->
         <mat-form-field style="width: 100%">
           <input matInput type="text" [(ngModel)]="post.image" placeholder="Image Url" name="image" width="">
         </mat-form-field>
@@ -43,10 +54,10 @@
   </mat-card-content>
 
   <mat-card-actions class="post-actions" *ngIf="!newPost" align="end">
-    <a *ngIf="truncate" mat-button [routerLink]="['/', post.key]" color="primary">Continue Reading
+    <a *ngIf="truncate" mat-button [routerLink]="post.key" color="primary">Continue Reading
       <mat-icon>arrow_forward</mat-icon>
     </a>
-    <a *ngIf="!truncate" mat-button routerLink="/" color="primary">
+    <a *ngIf="!truncate" mat-button routerLink="../" color="primary">
       <mat-icon>arrow_backward</mat-icon> Back to Posts</a>
     <button *ngIf="morePosts" (click)="loadMorePosts()" mat-raised-button color="primary">
       Load more posts
