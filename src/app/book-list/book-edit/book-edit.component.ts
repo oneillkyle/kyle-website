@@ -42,10 +42,10 @@ export class BookEditComponent implements OnInit {
       inverseDate: -date.getTime(),
       year: date.getFullYear()
     };
-    console.log(this.form.valid);
-    console.log(this.form.valid);
     console.log(book);
-    this.dialogRef.close({book, action: 'save'});
+    if (this.form.valid) {
+      this.dialogRef.close({book, action: 'save'});
+    }
   }
 
   deleteBook() {

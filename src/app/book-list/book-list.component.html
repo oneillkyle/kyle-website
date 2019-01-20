@@ -8,12 +8,24 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngFor="let book of (books | async)">
-        {{ book | json }}
+        <!-- <mat-icon mat-list-icon>folder</mat-icon> -->
+        <h4 mat-line>
+          <img *ngIf="book.image" [src]="book.image" alt="Book photo" style="height: 40px; width: 40px;">
+          <a [href]="book.purchaseLink" target="_blank">
+            {{ book.title }} - {{ book.author }}
+          </a>
+        </h4>
+        <p mat-line>
+          <app-star-rating [score]="book.rating" [forDisplay]="true" maxScore="5"></app-star-rating>
+        </p>
+        <p mat-line>Finished {{ book.date | date }}</p>
+        <p mat-line>Format: {{ book.audio ? 'Audio' : 'Text' }}</p>
+        <p mat-line *ngIf="book.reviewLink"><a [routerLink]="book.reviewLink">Review</a></p>
       </mat-list-item>
     </mat-list>
   </mat-card-content>
 </mat-card>
 
-<button type="button" (click)="openDialog({})">Open Dialog</button>
+<button *ngIf="admin" type="button" (click)="openDialog({})">Open Dialog</button>
 
 <!-- <app-book-edit></app-book-edit> -->

@@ -34,6 +34,7 @@ export class BookListComponent implements OnInit {
   ngOnInit() {
     this.bookListService.setEndpoint('book-list');
     this.getUser();
+    this.nextPage();
   }
 
   getUser() {
