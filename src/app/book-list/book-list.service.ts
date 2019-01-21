@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable, from } from 'rxjs';
-import { Post } from '../datatypes';
+import { BookRating } from '../datatypes';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class PostService {
+export class BookListService {
   private postsRef: AngularFireList<any>;
   private db: AngularFireList<any>;
   private posts;
@@ -24,35 +24,36 @@ export class PostService {
     );
   }
 
-  create(title: string, body: string, date: number): Observable<any> {
+  create(rating: BookRating): Observable<any> {
     return from(
       this.postsRef.push({
-        title,
-        body,
-        date,
-        inverseDate: -date
+        ...rating,
+        inverseDate: -rating.date
       })
     );
   }
 
-  createOrUpdate(key, { title, body, date, image }): Observable<any> {
-    const post = {
-      title,
-      body,
-      date,
-      image: image || null,
-      inverseDate: -date
+  createOrUpdate(rating: BookRating): Observable<any> {
+    const key = rating.key;
+    const book = {
+      ...rating,
+      image: rating.image || null,
+      inverseDate: -rating.date
     };
+    delete book.key;
     if (key) {
-      return from(this.postsRef.update(key, post));
+      return from(this.postsRef.update(key, book));
     } else {
-      return from(this.postsRef.push(post));
+      return from(this.postsRef.push(book));
     }
   }
 
-  update(id: any, title: string, body: string, date: number): Observable<any> {
+  update(key, rating: BookRating): Observable<any> {
     return from(
-      this.postsRef.update(id, { title, body, date, inverseDate: -date })
+      this.postsRef.update(key, {
+        ...rating,
+        inverseDate: -rating.date
+      })
     );
   }
 
@@ -60,27 +61,29 @@ export class PostService {
     if (key) this.postsRef.remove(key);
   }
 
-  nextPage(): Observable<Post[]> {
+  nextPage(): Observable<BookRating[]> {
     return this.db.snapshotChanges().pipe(
       map(changes => {
-        return changes.map(c => ({ key: c.payload.key, ...c.payload.val() }));
+        return changes.map(c => ({
+          key: c.payload.key,
+          ...c.payload.val() }));
       })
     );
   }
 
-  getAllPosts(): Observable<Post[]> {
+  getAllPosts(): Observable<{}[]> {
     return this.afDb
       .list(`/${this.endpoint}`, ref => ref.orderByChild('inverseDate'))
       .valueChanges();
   }
 
-  getSinglePost(id: string): Observable<Post> {
+  getSinglePost(key: string): Observable<BookRating> {
     return this.afDb
-      .object(`/${this.endpoint}/${id}`)
+      .object(`/${this.endpoint}/${key}`)
       .valueChanges()
       .pipe(
-        map((post: Post) => {
-          if (post) post.key = id;
+        map((post: BookRating) => {
+          if (post) post.key = key;
           return post;
         })
       );

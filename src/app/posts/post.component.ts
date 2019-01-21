@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy, EventEmitter, Input, Output } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { Post } from '../datatypes';
 import * as _ from 'lodash';
 
@@ -74,14 +73,9 @@ export class PostComponent implements OnInit {
   onCancelEdit: EventEmitter<any> = new EventEmitter();
 
   dateOptions = {};
-  date;
-  formattedDate;
-  currentDate;
-  get displayPostBody() {
-    return  this.sanitizer.bypassSecurityTrustHtml(this.post.body as string);
-  }
+  date: Date;
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor() {
   }
 
   ngOnInit() {
@@ -90,9 +84,7 @@ export class PostComponent implements OnInit {
       this.newPost = true;
       this.post = new Post();
     }
-    this.currentDate = new Date().getTime();
-    this.date = _.get(this.post, 'date', this.currentDate);
-    this.formattedDate = this.transformTime(this.date);
+    this.date = this.post.date ? new Date(this.post.date) : new Date();
   }
 
   editPost() {
@@ -100,7 +92,7 @@ export class PostComponent implements OnInit {
   }
 
   createOrUpdatePost() {
-    this.post.date = new Date(this.formattedDate).getTime();
+    this.post.date = this.date.getTime();
     this.onPostSave.emit({
       key: _.get(this.post, 'key', null),
       post: _.omit(this.post, 'key')
@@ -127,10 +119,5 @@ export class PostComponent implements OnInit {
 
   loadMorePosts() {
     this.onMorePosts.emit();
-  }
-
-  transformTime(time) {
-    const timeStamp = new Date(time);
-    return timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString();
   }
 };

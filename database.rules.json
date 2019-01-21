@@ -7,6 +7,16 @@
       ".write": "root.child('groups/admin').hasChild(auth.uid)",
       ".indexOn": "inverseDate"
     },
+    "books": {
+      ".read": true,
+      ".write": "root.child('groups/admin').hasChild(auth.uid)",
+      ".indexOn": "inverseDate"
+    },
+    "book-list": {
+      ".read": true,
+      ".write": "root.child('groups/admin').hasChild(auth.uid)",
+      ".indexOn": "inverseDate"
+    },
     "about": {
       ".read": true,
       ".write": "root.child('groups/admin').hasChild(auth.uid)"

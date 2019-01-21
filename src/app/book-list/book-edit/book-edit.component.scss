@@ -1,0 +1,7 @@
+.book-form {
+  display: flex;
+  flex-flow: row wrap;
+  mat-form-field {
+    flex: 1 0 100%;
+  }
+}

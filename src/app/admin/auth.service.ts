@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { AngularFireDatabase } from 'angularfire2/database';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase';
+import { BehaviorSubject } from 'rxjs';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import * as firebase from 'firebase/app';
 
 import { User } from '../datatypes';
 import * as _ from 'lodash';

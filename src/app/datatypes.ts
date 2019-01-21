@@ -19,3 +19,19 @@ export class Post {
     public key?: string | number
   ) {}
 }
+
+export class BookRating {
+  constructor(
+    public title: string,
+    public author: string,
+    public date: number,
+    public year: number,
+    public rating: number,
+    public audio: boolean,
+    public purchaseLink: string,
+    public reviewLink?: string,
+    public image?: string,
+    public inverseDate?: number,
+    public key?: string
+  ) {}
+}

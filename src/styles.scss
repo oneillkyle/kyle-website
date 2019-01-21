@@ -29,6 +29,12 @@ body {
   justify-content: space-around;
 }
 
+.flex-row-nowrap {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-around;
+}
+
 .flex-row-start {
   flex-flow: row wrap;
   display: flex;

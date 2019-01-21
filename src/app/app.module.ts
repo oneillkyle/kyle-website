@@ -7,11 +7,11 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routing } from './routes';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
-import { AngularFireDatabaseModule  } from 'angularfire2/database';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule  } from '@angular/fire/database';
 import { firebaseConfig } from './firebase-config';
-import { MarkdownModule } from 'ngx-md';
+import { NgxMdModule } from 'ngx-md';
 
 import { SharedModule } from './shared/shared.module';
 
@@ -25,7 +25,13 @@ import { PostsComponent } from './posts/posts.component';
 import { AboutComponent } from './about/about.component';
 import { SideNavComponent } from './core/side-nav.component';
 import { PostService } from './posts/post.service';
+import { BookListService } from './book-list/book-list.service';
 import { HomeComponent } from './home/home.component';
+import { BlogComponent } from './blog/blog.component';
+import { BooksComponent } from './books/books.component';
+import { BookListComponent } from './book-list/book-list.component';
+import { BookEditComponent} from './book-list/book-edit/book-edit.component';
+import { StarRatingComponent } from './rating/rating.component';
 
 @NgModule({
     imports: [
@@ -34,7 +40,7 @@ import { HomeComponent } from './home/home.component';
         routing,
         SharedModule,
         BrowserAnimationsModule,
-        MarkdownModule.forRoot(),
+        NgxMdModule.forRoot(),
         AngularFireModule.initializeApp(firebaseConfig, 'kyle-website'),
         AngularFireAuthModule,
         AngularFireDatabaseModule
@@ -47,11 +53,20 @@ import { HomeComponent } from './home/home.component';
         PostsComponent,
         AboutComponent,
         SideNavComponent,
-        HomeComponent
+        HomeComponent,
+        BlogComponent,
+        BooksComponent,
+        BookListComponent,
+        BookEditComponent,
+        StarRatingComponent
     ],
     providers: [
         AuthGuard,
         AuthService,
+        BookListService
+    ],
+    entryComponents: [
+        BookEditComponent
     ],
     bootstrap: [AppComponent]
 })
