@@ -63,7 +63,7 @@ export class BookEditComponent implements OnInit {
       date: [null, Validators.required],
       rating: [0, Validators.required],
       audio: [false],
-      purchaseLink: ['', Validators.required],
+      purchaseLink: [],
       reviewLink: [],
       image: []
     });

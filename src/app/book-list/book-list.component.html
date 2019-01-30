@@ -7,21 +7,25 @@
 
   <mat-card-content>
     <mat-list>
-      <mat-list-item *ngFor="let book of (books | async)">
-        <mat-icon mat-list-icon *ngIf="user?.admin" (click)="openDialog(book)">edit</mat-icon>
-        <h4 mat-line>
-          <img *ngIf="book.image" [src]="book.image" alt="Book photo" style="height: 40px; width: 40px;">
-          <a [href]="book.purchaseLink" target="_blank">
-            {{ book.title }} - {{ book.author }}
-          </a>
-        </h4>
-        <p mat-line>
-          <app-star-rating [score]="book.rating" [forDisplay]="true" maxScore="5"></app-star-rating>
-        </p>
-        <p mat-line>Finished {{ book.date | date }}</p>
-        <p mat-line>Format: {{ book.audio ? 'Audio' : 'Text' }}</p>
-        <p mat-line *ngIf="book.reviewLink"><a [routerLink]="book.reviewLink">Review</a></p>
-      </mat-list-item>
+      <ng-container *ngFor="let book of (books | async)">
+        <h3 *ngIf="!book.key" mat-subheader>{{ book.date | date: 'MMMM y' }}</h3>
+        <mat-divider *ngIf="!book.key"></mat-divider>
+        <mat-list-item *ngIf="book.key">
+          <mat-icon mat-list-icon *ngIf="user?.admin" (click)="openDialog(book)" style="cursor: pointer;">edit</mat-icon>
+          <h4 mat-line>
+            <img *ngIf="book.image" [src]="book.image" alt="Book photo" style="height: 40px; width: 40px;">
+            <a *ngIf="book.purchaseLink" [href]="book.purchaseLink" target="_blank">
+              {{ book.title }} - {{ book.author }}
+            </a>
+            <span *ngIf="!book.purchaseLink">{{ book.title }} - {{ book.author }}</span>
+          </h4>
+          <p mat-line>
+            <app-star-rating [score]="book.rating" [forDisplay]="true" maxScore="5"></app-star-rating>
+          </p>
+          <p mat-line>Format: {{ book.audio ? 'Audio' : 'Text' }}</p>
+          <p mat-line *ngIf="book.reviewLink"><a [routerLink]="book.reviewLink">Review</a></p>
+        </mat-list-item>
+      </ng-container>
     </mat-list>
   </mat-card-content>
   <mat-card-actions *ngIf="user?.admin">
