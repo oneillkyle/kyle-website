@@ -7,6 +7,7 @@ import { BookRating } from '../datatypes';
 
 import { BookListService } from './book-list.service';
 import { BookEditComponent } from './book-edit/book-edit.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-book-list',
@@ -58,7 +59,23 @@ export class BookListComponent implements OnInit {
   }
 
   nextPage() {
-    this.books = this.bookListService.nextPage();
+    this.books = this.bookListService.nextPage().pipe(
+      map((books) => {
+        let currentYear;
+        let bookDate;
+        const bookReduce = books.reduce((bookList, book) => {
+          bookDate = new Date(book.date);
+          const bookYear = `${bookDate.getMonth()}${bookDate.getFullYear()}`
+          if (bookYear !== currentYear) {
+            bookList.push({date: bookDate});
+            currentYear = bookYear;
+          }
+          bookList.push(book);
+          return bookList;
+        }, []);
+        return bookReduce;
+      })
+    );
   }
 
   transformTime(time) {

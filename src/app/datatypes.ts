@@ -28,7 +28,7 @@ export class BookRating {
     public year: number,
     public rating: number,
     public audio: boolean,
-    public purchaseLink: string,
+    public purchaseLink?: string,
     public reviewLink?: string,
     public image?: string,
     public inverseDate?: number,
