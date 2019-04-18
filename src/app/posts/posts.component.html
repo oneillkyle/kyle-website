@@ -1,18 +1,40 @@
 <div class="post-item" *ngIf="user?.admin">
-  <button *ngIf="!creatingPost" mat-icon-button (click)="creatingPost = true"><mat-icon>note_add</mat-icon></button>
-  <post *ngIf="creatingPost" [enableEdit]="user?.admin" (onPostSave)="createOrUpdatePost($event)" (onCancelEdit)="creatingPost = false"></post>
+  <button *ngIf="!creatingPost" mat-icon-button (click)="creatingPost = true">
+    <mat-icon>note_add</mat-icon>
+  </button>
+  <post
+    *ngIf="creatingPost"
+    [enableEdit]="user?.admin"
+    (onPostSave)="createOrUpdatePost($event)"
+    (onCancelEdit)="creatingPost = false"
+  ></post>
 </div>
 
 <div class="posts-container">
-  <div *ngFor="let post of posts | async; let last = last" class="post-item">
-    <post [enableEdit]="user?.admin" [enableDelete]="user?.admin" [post]="post" [morePosts]="morePosts && last" (onPostSave)="createOrUpdatePost($event)"
-      (onMorePosts)="nextPage($event)" (onDeletePost)="deletePost($event)" [truncate]="true">
+  <div *ngFor="let post of (posts | async); let last = last" class="post-item">
+    <post
+      [enableEdit]="user?.admin"
+      [enableDelete]="user?.admin"
+      [post]="post"
+      [morePosts]="morePosts && last"
+      (onPostSave)="createOrUpdatePost($event)"
+      (onMorePosts)="nextPage($event)"
+      (onDeletePost)="deletePost($event)"
+      [truncate]="true"
+    >
     </post>
+    <mat-divider></mat-divider>
   </div>
 
   <div class="post-item" *ngIf="post">
-    <post [enableEdit]="user?.admin" [enableDelete]="user?.admin" [post]="post" (onPostSave)="createOrUpdatePost($event)" (onDeletePost)="deletePost($event)"
-      [truncate]="false">
+    <post
+      [enableEdit]="user?.admin"
+      [enableDelete]="user?.admin"
+      [post]="post"
+      (onPostSave)="createOrUpdatePost($event)"
+      (onDeletePost)="deletePost($event)"
+      [truncate]="false"
+    >
     </post>
   </div>
 </div>
