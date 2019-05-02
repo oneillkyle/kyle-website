@@ -1,6 +1,6 @@
 <mat-card [ngClass]="{'unpublished': currentDate < post.date, 'small-post': truncate}">
   <mat-card-header>
-    <mat-card-title *ngIf="!editingPost && !noHeader">{{post?.title}}</mat-card-title>
+    <mat-card-title *ngIf="!editingPost && !noHeader" class="post-header">{{post?.title}}</mat-card-title>
 
     <mat-card-subtitle *ngIf="!editingPost && !noHeader">{{post?.date | date}}</mat-card-subtitle>
 
@@ -54,11 +54,11 @@
   </mat-card-content>
 
   <mat-card-actions class="post-actions" *ngIf="!newPost" align="end">
-    <a *ngIf="truncate" mat-button [routerLink]="post.key" color="primary">Continue Reading
-      <mat-icon>arrow_forward</mat-icon>
+    <a *ngIf="truncate" mat-button [routerLink]="post.key" color="primary" matTooltip="Full Page">
+      <mat-icon>open_with</mat-icon>
     </a>
-    <a *ngIf="!truncate" mat-button routerLink="../" color="primary">
-      <mat-icon>arrow_backward</mat-icon> Back to Posts</a>
+    <a *ngIf="!truncate" mat-button routerLink="../" color="primary" matTooltip="Back to Posts">
+      <mat-icon>arrow_backward</mat-icon></a>
     <button *ngIf="morePosts" (click)="loadMorePosts()" mat-raised-button color="primary">
       Load more posts
     </button>

@@ -14,16 +14,22 @@
           <mat-icon mat-list-icon *ngIf="user?.admin" (click)="openDialog(book)" style="cursor: pointer;">edit</mat-icon>
           <h4 mat-line>
             <img *ngIf="book.image" [src]="book.image" alt="Book photo" style="height: 40px; width: 40px;">
-            <a *ngIf="book.purchaseLink" [href]="book.purchaseLink" target="_blank">
-              {{ book.title }} - {{ book.author }}
-            </a>
-            <span *ngIf="!book.purchaseLink">{{ book.title }} - {{ book.author }}</span>
+            <span class="book-title">{{ book.title }}</span>
+            <span class="title-icons">
+              <a *ngIf="book.reviewLink" mat-icon-button [routerLink]="book.reviewLink" matTooltip="Review" color="accent">
+                <mat-icon>description</mat-icon>
+              </a>
+              <a *ngIf="book.purchaseLink" mat-icon-button [href]="book.purchaseLink" target="_blank" matTooltip="Purchase" color="accent">
+                <mat-icon>shopping_cart</mat-icon>
+              </a>
+            </span>
           </h4>
+          <h5 mat-line class="mat-card-subtitle">{{ book.author }}</h5>
           <p mat-line>
             <app-star-rating [score]="book.rating" [forDisplay]="true" maxScore="5"></app-star-rating>
+            <mat-icon *ngIf="book.audio" matTooltip="Audio Version">headset</mat-icon>
+            <mat-icon *ngIf="!book.audio" matTooltip="Text Version">book</mat-icon>
           </p>
-          <p mat-line>Format: {{ book.audio ? 'Audio' : 'Text' }}</p>
-          <p mat-line *ngIf="book.reviewLink"><a [routerLink]="book.reviewLink">Review</a></p>
         </mat-list-item>
       </ng-container>
     </mat-list>

@@ -1,7 +1,12 @@
 <mat-sidenav-container fullscreen>
   <div>
+    <div class="page-banner">
+      <h1 class="page-banner-header">
+          <a routerLink="/">Kyle O'Neill</a>
+      </h1>
+    </div>
     <mat-toolbar>
-      <h2 class="brand" routerLink="/"><a>Kyle O'Neill</a></h2>
+      <!-- <h2 class="brand" routerLink="/"><a>Kyle O'Neill</a></h2> -->
       <div class="sc-toolbar">
         <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
         <a mat-button routerLink="/books" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Books</a>

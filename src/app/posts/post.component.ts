@@ -7,8 +7,8 @@ import * as _ from 'lodash';
   templateUrl: './post.component.html',
   styles: [
     `
-    .mat-card-title {
-      font-size: 24px;
+    .post-header {
+      font-size: 36px;
     }
 
     .mat-card-subtitle {
@@ -16,6 +16,10 @@ import * as _ from 'lodash';
     }
 
     .mat-card-content {
+    }
+
+    .mat-card {
+      border-radius: 0;
     }
 
     .post-submits {

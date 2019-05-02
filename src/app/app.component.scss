@@ -1,5 +1,5 @@
 .mat-sidenav-container {
-  background-color: #f5f8fa;
+  background-color: #fffaeb;
 }
 
 .mat-sidenav {
@@ -17,7 +17,7 @@
 // }
 
 .mat-toolbar {
-  background-color: white;
+  background-color: #fffaeb;
 
   .mat-icon {
     cursor: pointer;
@@ -25,7 +25,7 @@
 
   .sc-toolbar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: baseline;
     width: 100%;
   }
@@ -52,4 +52,25 @@
 
 .brand {
   cursor: pointer;
+}
+
+.page-banner {
+  display: flex;
+  height: 160px;
+  justify-content: center;
+  background-color: #fffaeb;
+}
+
+.page-banner-header {
+  line-height: 100px;
+  font-size: 65px;
+  a {
+    text-decoration: none;
+  }
+  a:visited {
+    color: black;
+  }
+  a:hover {
+    color: red;
+  }
 }
