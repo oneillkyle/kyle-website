@@ -12,6 +12,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './home/home.component';
 import { BooksComponent } from './books/books.component';
 import { BlogComponent } from './blog/blog.component';
+import { BookViewComponent } from './book-list/book-view/book-view.component';
 
 const appRoutes: Routes = [
     {
@@ -29,7 +30,7 @@ const appRoutes: Routes = [
     },
     {
         path: 'books/:id',
-        component: BlogComponent
+        component: BookViewComponent
     },
     { path: 'login', component: LoginComponent },
     {
@@ -38,7 +39,8 @@ const appRoutes: Routes = [
     },
     {
         path: 'blog/:id',
-        component: BlogComponent
+        component: BlogComponent,
+        data: {endpoint: 'posts'}
     },
     { path: '**', redirectTo: 'blog' }
 

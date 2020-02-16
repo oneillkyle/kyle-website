@@ -32,6 +32,7 @@ import { BooksComponent } from './books/books.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookEditComponent} from './book-list/book-edit/book-edit.component';
 import { StarRatingComponent } from './rating/rating.component';
+import { BookViewComponent } from './book-list/book-view/book-view.component';
 
 @NgModule({
     imports: [
@@ -58,7 +59,8 @@ import { StarRatingComponent } from './rating/rating.component';
         BooksComponent,
         BookListComponent,
         BookEditComponent,
-        StarRatingComponent
+        StarRatingComponent,
+        BookViewComponent
     ],
     providers: [
         AuthGuard,

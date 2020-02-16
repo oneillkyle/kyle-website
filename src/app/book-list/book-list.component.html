@@ -16,7 +16,7 @@
             <img *ngIf="book.image" [src]="book.image" alt="Book photo" style="height: 40px; width: 40px;">
             <span class="book-title">{{ book.title }}</span>
             <span class="title-icons">
-              <a *ngIf="book.reviewLink" mat-icon-button [routerLink]="book.reviewLink" matTooltip="Review" color="accent">
+              <a *ngIf="book.review" mat-icon-button matTooltip="Review" color="accent" [routerLink]="['/books', book.key]">
                 <mat-icon>description</mat-icon>
               </a>
               <a *ngIf="book.purchaseLink" mat-icon-button [href]="book.purchaseLink" target="_blank" matTooltip="Purchase" color="accent">

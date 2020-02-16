@@ -29,6 +29,7 @@ export class BookEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.book = this.data;
     this.form = this.newForm();
     const date = this.data.date ? {
       date: new Date(this.data.date)
@@ -42,6 +43,7 @@ export class BookEditComponent implements OnInit {
   saveBook() {
     const date = this.form.value.date;
     const book: BookRating = {
+      ...this.book,
       ...this.form.value,
       date: date.getTime(),
       inverseDate: -date.getTime(),
@@ -64,7 +66,7 @@ export class BookEditComponent implements OnInit {
       rating: [0, Validators.required],
       audio: [false],
       purchaseLink: [],
-      reviewLink: [],
+      review: [],
       image: []
     });
   }

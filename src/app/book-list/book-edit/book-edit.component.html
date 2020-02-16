@@ -52,21 +52,22 @@
       </mat-form-field>
       <mat-form-field>
         <input
-          matInput
-          type="text"
-          formControlName="reviewLink"
-          placeholder="Review Link"
-          name="reviewLink"
+        matInput
+        type="text"
+        formControlName="image"
+        placeholder="Image"
+        name="image"
         />
       </mat-form-field>
       <mat-form-field>
-        <input
+        <textarea
           matInput
-          type="text"
-          formControlName="image"
-          placeholder="Image"
-          name="image"
-        />
+          matTextareaAutosize
+          matAutosizeMinRows="2"
+          formControlName="review"
+          placeholder="Review"
+          name="review">
+        </textarea>
       </mat-form-field>
     </form>
   </div>
