@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title class="post-header" *ngIf="book">Review Of: {{book?.title}}</mat-card-title>
+
+    <mat-card-subtitle *ngIf="book">
+      <div>
+        by {{book?.author}}
+      </div>
+      <div>
+        <app-star-rating [score]="book.rating" [forDisplay]="true" maxScore="5"></app-star-rating>
+        <mat-icon *ngIf="book.audio" matTooltip="Audio Version">headset</mat-icon>
+        <mat-icon *ngIf="!book.audio" matTooltip="Text Version">book</mat-icon>
+        <!-- <a *ngIf="book.purchaseLink" [href]="book.purchaseLink" target="_blank" matTooltip="Purchase" color="accent">
+          <mat-icon>shopping_cart</mat-icon>
+        </a> -->
+      </div>
+      <div>{{book?.date | date}}</div>
+    </mat-card-subtitle>
+
+    <div class="header-actions">
+      <button mat-icon-button *ngIf="(user | async)?.admin" (click)='openDialog(book)'>
+        <mat-icon aria-label="Edit Book Rating">edit</mat-icon>
+      </button>
+      <a mat-icon-button routerLink="../" matTooltip="Back to Book List">
+        <mat-icon aria-label="Back to Book List">arrow_backward</mat-icon>
+      </a>
+    </div>
+  </mat-card-header>
+
+  <img *ngIf="book?.image" mat-card-image [src]="book?.image" alt="Post photo">
+
+  <mat-card-content>
+    <div class="loader">
+      <mat-spinner *ngIf="!book"></mat-spinner>
+    </div>
+    <ngx-md [data]="book?.review"></ngx-md>
+  </mat-card-content>
+
+  <mat-card-footer></mat-card-footer>
+
+</mat-card>

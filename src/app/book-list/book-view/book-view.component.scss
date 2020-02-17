@@ -1,0 +1,32 @@
+.post-header {
+  font-size: 36px;
+}
+
+.mat-card-subtitle {
+  padding-left: 2px;
+}
+
+.mat-card {
+  border-radius: 0;
+}
+
+.post-submits {
+  margin-top: 15px;
+  margin-left: 5px;
+}
+
+.post-actions {
+  margin-left: 10px;
+}
+
+.header-actions {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+}

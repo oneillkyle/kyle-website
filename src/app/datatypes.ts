@@ -1,11 +1,11 @@
 import { SafeHtml } from '@angular/platform-browser';
 
 export class User {
-  admin: boolean;
-  uid: string;
+  admin?: boolean;
+  uid?: string;
   constructor(options) {
     this.admin = options.admin || false;
-    this.uid = options.uid;
+    this.uid = options.uid || null;
   }
 }
 

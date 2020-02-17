@@ -78,13 +78,6 @@ export class BookListComponent implements OnInit {
     );
   }
 
-  transformTime(time) {
-    const timeStamp = new Date(time);
-    return (
-      timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString()
-    );
-  }
-
   openDialog(data: BookRating): void {
     const dialogRef = this.dialog.open(BookEditComponent, {
       width: '600px',

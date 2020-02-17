@@ -71,13 +71,13 @@ export class BookListService {
     );
   }
 
-  getAllPosts(): Observable<{}[]> {
+  getAllBooks(): Observable<{}[]> {
     return this.afDb
       .list(`/${this.endpoint}`, ref => ref.orderByChild('inverseDate'))
       .valueChanges();
   }
 
-  getSinglePost(key: string): Observable<BookRating> {
+  getSingleBook(key: string): Observable<BookRating> {
     return this.afDb
       .object(`/${this.endpoint}/${key}`)
       .valueChanges()

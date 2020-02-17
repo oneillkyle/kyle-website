@@ -3,11 +3,10 @@ import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material';
 
 import { AuthService } from '../../admin/auth.service';
-import { BookRating } from '../../datatypes';
+import { BookRating, User } from '../../datatypes';
 
 import { BookListService } from '../book-list.service';
 import { BookEditComponent } from '../book-edit/book-edit.component';
-import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -17,15 +16,8 @@ import { ActivatedRoute } from '@angular/router';
   providers: []
 })
 export class BookViewComponent implements OnInit {
-  public books: Observable<BookRating[]>;
-  public book: BookRating;
-  public enableEdit = false;
-  public morePosts = false;
-  public creatingPost = false;
-
-  user;
-  admin;
-  authSub;
+  book: BookRating;
+  user: Observable<User>;
 
   constructor(
     private route: ActivatedRoute,
@@ -35,59 +27,27 @@ export class BookViewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      console.log(params);
-    });
     this.bookListService.setEndpoint('book-list');
+    this.route.params.subscribe(params => {
+      if (params.id) {
+        this.bookListService
+          .getSingleBook(params.id)
+          .subscribe(book => (this.book = book));
+      }
+    });
     this.getUser();
-    this.nextPage();
   }
 
   getUser() {
-    this.authSub = this.authService.getAuth().subscribe(user => {
-      this.user = user;
-      // if (_.get(this.user, 'admin')) this.posts = this.bookListService.getAllPosts();
-    });
-  }
-
-  getAllPosts() {
-    this.book = null;
-    this.nextPage();
+    this.user = this.authService.getAuth();
   }
 
   createOrUpdateBook(book: BookRating) {
     this.bookListService.createOrUpdate(book);
   }
 
-  deleteBook(book) {
+  deleteBook(book: BookRating) {
     this.bookListService.remove(book.key);
-  }
-
-  nextPage() {
-    this.books = this.bookListService.nextPage().pipe(
-      map((books) => {
-        let currentYear;
-        let bookDate;
-        const bookReduce = books.reduce((bookList, book) => {
-          bookDate = new Date(book.date);
-          const bookYear = `${bookDate.getMonth()}${bookDate.getFullYear()}`
-          if (bookYear !== currentYear) {
-            bookList.push({date: bookDate});
-            currentYear = bookYear;
-          }
-          bookList.push(book);
-          return bookList;
-        }, []);
-        return bookReduce;
-      })
-    );
-  }
-
-  transformTime(time) {
-    const timeStamp = new Date(time);
-    return (
-      timeStamp.toLocaleDateString() + ' ' + timeStamp.toLocaleTimeString()
-    );
   }
 
   openDialog(data: BookRating): void {
@@ -96,14 +56,16 @@ export class BookViewComponent implements OnInit {
       data
     });
 
-    dialogRef.afterClosed().subscribe((result?: {book: BookRating, action: 'save'|'delete'}) => {
-      if (result) {
-        if (result.action === 'delete') {
-          this.deleteBook(result.book);
-        } else if (result.action === 'save') {
-          this.createOrUpdateBook(result.book);
+    dialogRef
+      .afterClosed()
+      .subscribe((result?: { book: BookRating; action: 'save' | 'delete' }) => {
+        if (result) {
+          if (result.action === 'delete') {
+            this.deleteBook(result.book);
+          } else if (result.action === 'save') {
+            this.createOrUpdateBook(result.book);
+          }
         }
-      }
-    });
+      });
   }
 }

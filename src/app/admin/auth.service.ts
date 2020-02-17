@@ -10,7 +10,7 @@ import * as _ from 'lodash';
 @Injectable()
 export class AuthService {
   private user: User;
-  authSubject = new BehaviorSubject({});
+  authSubject: BehaviorSubject<User> = new BehaviorSubject({});
 
   constructor(
     private afAuth: AngularFireAuth,
