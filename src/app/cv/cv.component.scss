@@ -1,0 +1,12 @@
+.header-actions {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row;
+}
+iframe {
+  width: 800px;
+  @media (max-width: 799px) {
+    width: 100%;
+  }
+}

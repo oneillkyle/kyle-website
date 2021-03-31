@@ -11,6 +11,8 @@
         <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Blog</a>
         <a mat-button routerLink="/books" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Books</a>
         <a mat-button routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a>
+        <a mat-button routerLink="/cv" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">CV</a>
+        <a mat-button href="euchrecreekfarm.com" target="_blank">Euchre Creek Farm<mat-icon class="nav-open-in-new-icon">open_in_new</mat-icon></a>
         <!-- <a mat-button routerLink="/about" routerLinkActive="active">About</a> -->
         <a *ngIf="user" mat-button (click)="signOut()">Sign Out</a>
       </div>

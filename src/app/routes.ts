@@ -13,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { BooksComponent } from './books/books.component';
 import { BlogComponent } from './blog/blog.component';
 import { BookViewComponent } from './book-list/book-view/book-view.component';
+import { CvComponent } from './cv/cv.component';
 
 const appRoutes: Routes = [
     {
@@ -23,6 +24,10 @@ const appRoutes: Routes = [
         path: 'admin',
         component: AdminComponent,
         canActivate: [AuthGuard]
+    },
+    {
+        path: 'cv',
+        component: CvComponent
     },
     {
         path: 'books',
